@@ -1,0 +1,31 @@
+#forgotPasswordContainer {
+  border: transparent;
+  display: grid;
+  justify-content: center;
+  width: 35%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#forgotPasswordHeading {
+  font-size: 48px;
+  color: rgb(220, 53, 69);
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#forgotPasswordMessage {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#forgotEmail {
+  margin-bottom: -5px;
+}
+
+#loginNav {
+  margin-top: 10px;
+  text-align: center;
+}

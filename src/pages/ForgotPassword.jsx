@@ -1,5 +1,12 @@
+import React from "react";
+import ForgotForm from "../components/ForgotForm";
+
 function ForgotPassword() {
-  return <h1>Welcome to Forgot Password</h1>;
+  return (
+    <div>
+      <ForgotForm />
+    </div>
+  );
 }
 
 export default ForgotPassword;
