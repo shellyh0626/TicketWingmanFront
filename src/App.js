@@ -12,22 +12,32 @@ function App() {
     <Router>
       <div className="App">
         {/* Navigation */}
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
+        <nav class="navbar navbar-expand-lg navbar-dark p-3 bg-danger">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item">
+              <Link to="/" class="nav-link mx-2 active">
+                Home
+              </Link>
             </li>
-            <li>
-              <Link to="/profile">User Profile</Link>
+            <li class="nav-item">
+              <Link to="/profile" class="nav-link mx-2">
+                User Profile
+              </Link>
             </li>
-            <li>
-              <Link to="/login">Login</Link>
+            <li class="nav-item">
+              <Link to="/login" class="nav-link mx-2">
+                Login
+              </Link>
             </li>
-            <li>
-              <Link to="/signup">Sign up</Link>
+            <li class="nav-item">
+              <Link to="/signup" class="nav-link mx-2">
+                Sign up
+              </Link>
             </li>
-            <li>
-              <Link to="/forgot">Forgot Password</Link>
+            <li class="nav-item">
+              <Link to="/forgot" class="nav-link mx-2">
+                Forgot Password
+              </Link>
             </li>
           </ul>
         </nav>
