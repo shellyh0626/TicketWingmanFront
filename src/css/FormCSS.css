@@ -1,4 +1,4 @@
-#loginFormContainer {
+#formContainer {
   border: transparent;
   display: grid;
   width: 35%;
@@ -6,7 +6,7 @@
   padding: 10px;
 }
 
-#loginFormHeading {
+#formHeading {
   font-size: 48px;
   font-weight: bolder;
   text-align: center;
