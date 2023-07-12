@@ -1,0 +1,67 @@
+#loginFormContainer {
+  border: transparent;
+  display: grid;
+  width: 35%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#loginFormHeading {
+  font-size: 48px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.google-button-icon {
+  width: 10%;
+}
+
+.google-button-text {
+  display: inline-block;
+  padding-left: 15px;
+}
+
+.center {
+  padding: 100;
+}
+
+.line {
+  width: 100%;
+  height: 45px;
+  position: relative;
+}
+
+.line::after,
+.line::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  height: 2px;
+  background: #000;
+  width: 40%;
+  top: 25%;
+}
+
+.line::after {
+  left: 0;
+}
+
+.line::before {
+  right: 0;
+}
+
+.or {
+  text-align: center;
+}
+
+#forgotPasswordNav {
+  margin-top: -8px;
+  margin-bottom: 8px;
+  text-align: right;
+}
+
+#signupNav {
+  margin-top: 10px;
+  text-align: center;
+}
