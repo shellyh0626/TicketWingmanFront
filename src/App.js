@@ -34,11 +34,6 @@ function App() {
                 Sign up
               </Link>
             </li>
-            <li class="nav-item">
-              <Link to="/forgot" class="nav-link mx-2">
-                Forgot Password
-              </Link>
-            </li>
           </ul>
         </nav>
 
