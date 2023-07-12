@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "../css/LoginFormCSS.css";
+import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../image/google.png";
 
 const LoginForm = () => {
   return (
-    <div id="loginFormContainer">
-      <h1 id="loginFormHeading">Login</h1>
+    <div id="formContainer">
+      <h1 id="formHeading">Login</h1>
       <div class="d-grid gap-2 col-6 mx-auto">
         <button type="button" class="btn btn-primary btn-lg">
           <img src={Google} alt="" className="google-button-icon" />
