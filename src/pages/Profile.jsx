@@ -1,5 +1,18 @@
+import React from "react";
+import UserProfile from "../components/UserProfile";
+
 function Profile() {
-  return <h1>Welcome to Profile</h1>;
+  return (
+    <div>
+      <UserProfile
+        firstName="Jane"
+        lastName="Doe"
+        userName="JaneDone28"
+        email="JaneDoe@gmail.com"
+        password="JaneDoe28"
+      />
+    </div>
+  );
 }
 
 export default Profile;

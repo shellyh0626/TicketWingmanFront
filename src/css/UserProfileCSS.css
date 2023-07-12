@@ -1,0 +1,22 @@
+#profileContainer {
+  border: solid;
+  display: grid;
+  width: 30%;
+  margin: 0 auto;
+  padding: 50px;
+  box-sizing: border-box;
+  margin-top: 50px;
+}
+
+#userProfilePicture {
+  margin-top: -30px;
+  width: 20%;
+}
+#profileFirstNameInput,
+#profileLastNameInput,
+#profileUserNameInput,
+#profileEmailInput,
+#profilePasswordInput {
+  width: 100%;
+  background-color: ghostwhite;
+}
