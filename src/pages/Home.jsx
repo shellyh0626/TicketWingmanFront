@@ -1,11 +1,33 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import Card from "../components/Card";
+import video from "../assets/video.mp4";
+import videoWebm from "../assets/videoWebm.webm";
+import "../css/Home.css";
 
 function Home() {
   return (
-    <div>
-      <SearchBar />
+    <div className="home">
+      {/* <Card /> */}
+      <video muted loop autoPlay>
+        <source src={video} type="video/mp4" />
+        Your browser does not support the video tag. I suggest you upgrade your
+        browser.
+        <source src={videoWebm} type="video/webm" />
+        Your browser does not support the video tag. I suggest you upgrade your
+        browser.
+      </video>
+      <div className="overlay"></div>
+      <div className="text">
+        <h2>Explore the world with TicketWingman</h2>
+      </div>
+      <div className="searchBar">
+        <SearchBar />
+      </div>
+      <div className="card-grid-heading">
+        <h2>Popular Destinations</h2>
+        <h4>Based on your location</h4>
+      </div>
       <Card />
     </div>
   );
