@@ -1,65 +1,90 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../redux/users/user.actions";
+import { useNavigate } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
 
 const SignupForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const error = useSelector((state) => state.user.error);
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const formName = "login";
+    const firstName = evt.target.firstName.value;
+    const lastName = evt.target.lastName.value;
+    const userName = evt.target.userName.value;
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+
+    dispatch(auth(email, password, formName));
+    navigate("/");
+  };
   return (
     <div id="formContainer">
       <h1 id="formHeading">Sign Up</h1>
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="First name"
-          required
-        />
-        <label for="floatingInput">Last Name</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="First name"
-          required
-        />
-        <label for="floatingInput">First Name</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="text"
-          class="form-control"
-          placeholder="First name"
-          required
-        />
-        <label for="floatingInput">User Name</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="email"
-          id="inputEmail"
-          class="form-control"
-          placeholder="name@example.com"
-          required
-        />
-        <label for="floatingInput">Email</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="password"
-          id="inputPassword"
-          class="form-control"
-          placeholder="Password"
-          required
-        />
-        <label for="floatingInput">Password</label>
-      </div>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-primary btn-lg">
-          Sign Up
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="First name"
+            name="firstName"
+            required
+          />
+          <label for="floatingInput">First Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Last name"
+            name="lastName"
+            required
+          />
+          <label for="floatingInput">Last Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            name="userName"
+            required
+          />
+          <label for="floatingInput">User Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="name@example.com"
+            name="email"
+            required
+          />
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            id="inputPassword"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <label for="floatingInput">Password</label>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Sign Up
+          </button>
+        </div>
+      </form>
       <br />
       <div className="center">
         <div className="line">

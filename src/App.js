@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import { ProtectedRoute } from "./utils/Auth";
 
 function App() {
   return (
@@ -40,11 +41,12 @@ function App() {
         {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile/*" element={<Profile />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile/*" element={<Profile />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
