@@ -3,8 +3,23 @@ import { Link } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../redux/users/user.actions";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const formName = "login";
+    const email = evt.target.email.value;
+    const password = evt.target.password.value;
+    dispatch(auth(email, password, formName));
+
+    navigate("/");
+  };
+
   return (
     <div id="formContainer">
       <h1 id="formHeading">Login</h1>
@@ -20,38 +35,42 @@ const LoginForm = () => {
           <div className="or">OR</div>
         </div>
       </div>
-      <div class="form-floating mb-3">
-        <input
-          type="email"
-          id="inputEmail"
-          class="form-control"
-          placeholder="name@example.com"
-          required
-        />
-        <label for="floatingInput">Email</label>
-      </div>
-      <div class="form-floating mb-3">
-        <input
-          type="password"
-          id="inputPassword"
-          class="form-control"
-          placeholder="Password"
-          required
-        />
-        <label for="floatingInput">Password</label>
-      </div>
-      <Link
-        to="/forgot"
-        id="forgotPasswordNav"
-        class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-      >
-        Forgot Password?
-      </Link>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-primary btn-lg">
-          Login
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            id="inputEmail"
+            class="form-control"
+            placeholder="name@example.com"
+            name="email"
+            required
+          />
+          <label for="floatingInput">Email</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            id="inputPassword"
+            class="form-control"
+            placeholder="Password"
+            name="password"
+            required
+          />
+          <label for="floatingInput">Password</label>
+        </div>
+        <Link
+          to="/forgot"
+          id="forgotPasswordNav"
+          class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+        >
+          Forgot Password?
+        </Link>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Login
+          </button>
+        </div>
+      </form>
       <Link
         to="/signup"
         id="signupNav"

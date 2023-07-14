@@ -13,7 +13,7 @@ const SignupForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = "login";
+    const formName = "signup";
     const firstName = evt.target.firstName.value;
     const lastName = evt.target.lastName.value;
     const userName = evt.target.userName.value;
