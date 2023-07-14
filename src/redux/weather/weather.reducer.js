@@ -1,6 +1,8 @@
 import weatherActionTypes from "./weather.types";
 export const INITIAL_WEATHER_STATE = {
+    //stores the data of daily average temperature in Fahrenheit degrees
     tempInFahrenheit: [],
+    //stores the data of daily average temperature in Celsius degrees
     tempInCelsius: []
 };
 
