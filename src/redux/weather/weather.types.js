@@ -1,5 +1,5 @@
 const weatherActionTypes = {
-    weatherTempF: 'weatherTemperatureF',
+    weatherTempF: 'weatherTempF',
     weatherTempC: 'weatherTempC'
 }
 
