@@ -1,6 +1,6 @@
 import React from "react";
 import "../css/SearchBarCSS.css";
-import Search from "../image/search.png";
+import Search from "../assets/search.png";
 // import { Link } from "react-router-dom";
 
 const SearchBar = () => {

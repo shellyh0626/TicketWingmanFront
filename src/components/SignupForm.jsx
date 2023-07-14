@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Google from "../image/google.png";
+import Google from "../assets/google.png";
 
 const SignupForm = () => {
   return (
