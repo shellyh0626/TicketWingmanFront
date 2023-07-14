@@ -6,45 +6,84 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import { ProtectedRoute } from "./utils/Auth";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "./redux/users/user.actions";
+
+/* const LinkButton = ({ to, children, onClick }) => (
+  <NavLink to={to} onClick={onClick}>
+    {children}
+  </NavLink>
+); */
 
 function App() {
+  const dispatch = useDispatch();
+  /* const navigate = useNavigate(); */
+  const isLoggedIn = useSelector((state) => !!state.user.id);
+
+  /*   const handleLogOut = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+    navigate("/login");
+  }; */
   return (
     <Router>
       <div className="App">
         {/* Navigation */}
-        <nav class="navbar navbar-expand-lg navbar-dark p-3 bg-danger">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item">
-              <Link to="/" class="nav-link mx-2 active">
-                Home
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link to="/profile" class="nav-link mx-2">
-                User Profile
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link to="/login" class="nav-link mx-2">
-                Login
-              </Link>
-            </li>
-            <li class="nav-item">
-              <Link to="/signup" class="nav-link mx-2">
-                Sign up
-              </Link>
-            </li>
+        <nav className="navbar navbar-expand-lg navbar-dark p-3 bg-danger">
+          <ul className="navbar-nav mx-auto">
+            {isLoggedIn ? (
+              <li className="nav-item">
+                <Link to="/" className="nav-link mx-2 active">
+                  Home
+                </Link>
+              </li>
+            ) : (
+              <>
+                <li className="nav-item">
+                  <Link to="/" className="nav-link mx-2 active">
+                    Home
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/login" className="nav-link mx-2">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/signup" className="nav-link mx-2">
+                    Sign up
+                  </Link>
+                </li>
+              </>
+            )}
+            {isLoggedIn && (
+              <li className="nav-item">
+                <Link to="/profile" className="nav-link mx-2">
+                  User Profile
+                </Link>
+              </li>
+            )}
+            {isLoggedIn && (
+              <li className="nav-item">
+                {/*  <LinkButton className="nav-link mx-2" onClick={handleLogOut}>
+                  Logout
+                </LinkButton> */}
+              </li>
+            )}
           </ul>
         </nav>
 
         {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/profile/*" element={<Profile />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile/*" element={<Profile />} />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<ForgotPassword />} />
-          <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
     </Router>
