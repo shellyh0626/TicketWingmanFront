@@ -11,17 +11,33 @@
 }
 
 .search-bar input {
-  border: 1px solid #ccc;
+  display: block;
+  border: 0.25px solid #dbdbdb;
   border-radius: 5px;
-  padding: 7px 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.search-bar input::placeholder {
+  font-size: 16px;
+  color: rgb(85, 84, 84);
+}
+
+.search-bar label {
+  font-size: 16px;
+  font-weight: 600;
 }
 
 .search-bar button {
   background: #4c8bf5;
-  width: 45px;
-  height: 45px;
+  width: 55px;
+  height: 55px;
   border: 0;
   border-radius: 50%;
   outline: none;
   cursor: pointer;
+}
+
+.search-bar button img {
+  width: 15px;
 }
