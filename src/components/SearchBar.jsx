@@ -7,16 +7,30 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <div>
-        <input type="text" placeholder="Where From?" className="inputField" />
+        <label>From</label>
+        <input
+          type="text"
+          placeholder="Airport or City"
+          className="inputField"
+          required
+        />
       </div>
       <div>
-        <input type="text" placeholder="Where To?" className="inputField" />
+        <label>To</label>
+        <input
+          type="text"
+          placeholder="Airport or City"
+          className="inputField"
+          required
+        />
       </div>
       <div>
-        <input type="text" placeholder="Starting Date" className="inputField" />
+        <label>Depart</label>
+        <input type="date" className="inputField" required />
       </div>
       <div>
-        <input type="text" placeholder="Ending Date" className="inputField" />
+        <label>Return</label>
+        <input type="date" className="inputField" required />
       </div>
       <button type="submit">
         <img src={Search} alt="" />
