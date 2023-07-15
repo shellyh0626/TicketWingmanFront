@@ -1,9 +1,15 @@
 import React from "react";
 import "../css/UserProfileCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useDispatch, useSelector } from "react-redux";
 
 function UserProfile(props) {
   const { firstName, lastName, userName, email, password } = props;
+  // contain state of current logged in user
+  // const currentUser = useSelector((state) => state.user);
+  // console.log(currentUser);
+  const currentUserEmail = useSelector((state) => state.user.email);
+  console.log(currentUserEmail);
   return (
     <div id="profileContainer">
       <img
