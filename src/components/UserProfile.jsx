@@ -1,15 +1,9 @@
 import React from "react";
 import "../css/UserProfileCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useDispatch, useSelector } from "react-redux";
 
 function UserProfile(props) {
   const { firstName, lastName, userName, email, password } = props;
-  // contain state of current logged in user
-  // const currentUser = useSelector((state) => state.user);
-  // console.log(currentUser);
-  const currentUserEmail = useSelector((state) => state.user.email);
-  console.log(currentUserEmail);
   return (
     <div id="profileContainer">
       <img
@@ -26,7 +20,7 @@ function UserProfile(props) {
           type="text"
           class="form-control form-control-lg"
           placeholder="First name"
-          value={firstName}
+          defaultValue={firstName}
         />
         <div class="mb-3">
           <label id="profileLastName" class="form-label col-form-label-lg">
@@ -37,7 +31,7 @@ function UserProfile(props) {
             type="text"
             class="form-control form-control-lg"
             placeholder="Last name"
-            value={lastName}
+            defaultValue={lastName}
           />
         </div>
       </div>
@@ -48,7 +42,7 @@ function UserProfile(props) {
           type="text"
           class="form-control form-control-lg"
           placeholder="Username"
-          value={userName}
+          defaultValue={userName}
         />
       </div>
       <div class="mb-3">
@@ -58,7 +52,7 @@ function UserProfile(props) {
           type="email"
           class="form-control form-control-lg"
           placeholder="Email"
-          value={email}
+          defaultValue={email}
         />
       </div>
       <div class="mb-3">
@@ -68,7 +62,7 @@ function UserProfile(props) {
           type="password"
           class="form-control form-control-lg"
           placeholder="Password"
-          value={password}
+          defaultValue={password}
         />
       </div>
     </div>

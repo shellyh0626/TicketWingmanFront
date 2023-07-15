@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../redux/users/user.actions";
+import { authSignup } from "../redux/users/user.actions";
 import { useNavigate } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,14 +13,13 @@ const SignupForm = () => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = "signup";
     const firstName = evt.target.firstName.value;
     const lastName = evt.target.lastName.value;
     const userName = evt.target.userName.value;
     const email = evt.target.email.value;
     const password = evt.target.password.value;
 
-    dispatch(auth(email, password, formName));
+    dispatch(authSignup(firstName, lastName, email, password));
     navigate("/");
   };
   return (

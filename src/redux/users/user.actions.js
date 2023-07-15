@@ -15,10 +15,32 @@ export const me = () => async (dispatch) => {
   }
 };
 
-export const auth = (email, password, method) => async (dispatch) => {
+export const authSignup =
+  (firstName, lastName, email, password) => async (dispatch) => {
+    let res;
+    try {
+      res = await axios.post(`http://localhost:8080/auth/signup`, {
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+    } catch (authError) {
+      return dispatch(getUser({ error: authError }));
+    }
+
+    try {
+      dispatch(getUser(res.data));
+      // histroy.push("/home");
+    } catch (dispatchOrHistoryErr) {
+      console.error(dispatchOrHistoryErr);
+    }
+  };
+
+export const authLogin = (email, password) => async (dispatch) => {
   let res;
   try {
-    res = await axios.post(`http://localhost:8080/auth/${method}`, {
+    res = await axios.post(`http://localhost:8080/auth/login`, {
       email,
       password,
     });
