@@ -9,6 +9,8 @@ import Profile from "./pages/Profile";
 import { ProtectedRoute } from "./utils/Auth";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import SearchResults from "./components/SearchResults";
+import SearchBar from "./components/SearchBar";
 import { logout } from "./redux/users/user.actions";
 
 /* const LinkButton = ({ to, children, onClick }) => (
@@ -84,6 +86,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot" element={<ForgotPassword />} />
+          <Route exact path="/" element={<SearchBar />} />
+          <Route path="/searchResults" element={<SearchResults />} />
         </Routes>
       </div>
     </Router>
