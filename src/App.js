@@ -6,8 +6,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import { ProtectedRoute } from "./utils/Auth";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
@@ -82,6 +82,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile/*" element={<Profile />} />
+          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/profile/edit" element={<EditProfile />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
