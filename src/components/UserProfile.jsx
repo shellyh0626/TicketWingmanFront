@@ -3,7 +3,7 @@ import "../css/UserProfileCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function UserProfile(props) {
-  const { firstName, lastName, userName, email, password } = props;
+  const { firstName, lastName, email, password } = props;
   return (
     <div id="profileContainer">
       <img
@@ -22,7 +22,7 @@ function UserProfile(props) {
           placeholder="First name"
           defaultValue={firstName}
         />
-        <div class="mb-3">
+        <div>
           <label id="profileLastName" class="form-label col-form-label-lg">
             Last Name
           </label>
@@ -34,16 +34,6 @@ function UserProfile(props) {
             defaultValue={lastName}
           />
         </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label col-form-label-lg">Username</label>
-        <input
-          id="profileUserNameInput"
-          type="text"
-          class="form-control form-control-lg"
-          placeholder="Username"
-          defaultValue={userName}
-        />
       </div>
       <div class="mb-3">
         <label class="form-label col-form-label-lg">Email</label>
