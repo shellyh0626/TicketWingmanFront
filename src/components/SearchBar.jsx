@@ -16,6 +16,7 @@ const SearchBar = () => {
       originLocationCode: fromValue,
       destinationLocationCode: toValue,
       departureDate: departValue,
+      // returnDate: returnValue,
       adults: 1,
     };
     //Sample search bar input:
@@ -82,6 +83,23 @@ const SearchBar = () => {
           onChange={(e) => setReturnValue(e.target.value)}
           required
         />
+      </div>
+      <div>
+        <label>Type</label>
+        <select>
+          <option selected>One-way</option>
+          <option>Roundtrip</option>
+        </select>
+      </div>
+      <div>
+        <label>Flight Class</label>
+        <select>
+          <option>Economy</option>
+          <option>Premium_Economy</option>
+          <option>Business</option>
+          <option>First</option>
+          <option selected>Any</option>
+        </select>
       </div>
       <button type="submit" onClick={handleSubmit}>
         <img src={Search} alt="" />
