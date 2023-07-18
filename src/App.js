@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
 import { logout } from "./redux/users/user.actions";
+import DisplayWeather from "./components/DisplayWeather"
 
 /* const LinkButton = ({ to, children, onClick }) => (
   <NavLink to={to} onClick={onClick}>
@@ -88,6 +89,7 @@ function App() {
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route exact path="/" element={<SearchBar />} />
           <Route path="/searchResults" element={<SearchResults />} />
+          <Route path="/displayWeather" element={<DisplayWeather />} />
         </Routes>
       </div>
     </Router>
