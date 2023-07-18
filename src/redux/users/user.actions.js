@@ -14,10 +14,12 @@ const editUser = (userEmail, updates) => ({
   },
 });
 
-export const me = () => async (dispatch) => {
+export const me = (email) => async (dispatch) => {
   try {
     console.log("Hello, it's me");
-    const res = await axios.get("http://localhost:8080/auth/me");
+    console.log(email);
+    let res = await axios.post("http://localhost:8080/auth/me",{email});
+    console.log(res.data);
     dispatch(getUser(res.data || {}));
   } catch (err) {
     console.error(err);
