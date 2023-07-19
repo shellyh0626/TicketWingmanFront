@@ -1,7 +1,7 @@
 import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions";
-import Barchart from "../components/Barchart";
+import DisplayWeather from "../components/DisplayWeather";
 
 function Weather() {
     let weather = useSelector((state) => state.weather.tempInFahrenheit);
@@ -18,7 +18,7 @@ function Weather() {
    
     return (
       <div>
-         <Barchart/>
+         <DisplayWeather/>
       </div>
     );
 }
