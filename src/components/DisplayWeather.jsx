@@ -1,6 +1,7 @@
 import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions"
+import {line} from "chart.js"
 
 function DisplayWeather() {
     const weather = useSelector((state) => state.weather.tempInFahrenheit);
