@@ -13,7 +13,7 @@ function Weather() {
             date2: "2022-12-30"
         };
         console.log("dispatch: historical weather");
-        dispatch(FETCH_WEATHER_C_THUNK(weatherObject));
+        dispatch(FETCH_WEATHER_F_THUNK(weatherObject));
     }, [dispatch]);
    
     return (

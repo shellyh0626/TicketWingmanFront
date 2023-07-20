@@ -11,18 +11,16 @@ const DisplayWeather = () => {
     const {ctx,chartArea:{top,bottom,left,right}} = chart;
     const gradiantSegment = ctx.createLinearGradient(0, bottom, 0, top);
     gradiantSegment.addColorStop(0,'#7cb1b7');
-
     gradiantSegment.addColorStop(0.5,'#e8c867');
-
     gradiantSegment.addColorStop(1,'rgb(255, 122, 136)');
     return gradiantSegment;
   }
 
   return (
-    <div style={{width:700}}>
+    <div style={{width:1000}}>
       {console.log(weather)}
       {weather.length!==0?
-      (<Line
+      (<Bar
         data={{labels: weather.daily.time.map((data) => data), 
           datasets: [
             {
@@ -40,8 +38,7 @@ const DisplayWeather = () => {
                 return visualGradient(chart);
               },
               tension: 0.1
-              
-            }
+            },
           ]
         }}
         options={{
@@ -63,11 +60,27 @@ const DisplayWeather = () => {
               to: 0,
               loop: true
             }
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Day'
+              }
+            },
+            y: {
+              // stacked: true,
+              title: {
+                display: true,
+                text: 'Temperature'
+              }
+            }
           }      
         }}
         width={600}
         height={400}   
-      />)
+      />
+      )
       :(<h1>LOADING...</h1>)}
     </div>
   );
