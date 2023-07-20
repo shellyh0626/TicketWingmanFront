@@ -2,35 +2,43 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
 import { useDispatch, useSelector } from "react-redux";
+import {Bar} from "react-chartjs-2";
 Chart.register(CategoryScale);
-const DisplayRainSnow = () => {
+const DisplayTemp = () => {
   const weather = useSelector((state) => state.weather.weatherTemp);
+
+  function visualGradient(chart){
+    const {ctx,chartArea:{top,bottom,left,right}} = chart;
+    const gradiantSegment = ctx.createLinearGradient(0, bottom, 0, top);
+    gradiantSegment.addColorStop(0,'#7cb1b7');
+    gradiantSegment.addColorStop(0.5,'#e8c867');
+    gradiantSegment.addColorStop(1,'rgb(255, 122, 136)');
+    return gradiantSegment;
+  }
 
   return (
     <div style={{width:700}}>
       {console.log(weather)}
       {weather.length!==0?
-      (<Line
+      (<Bar
         data={{labels: weather.daily.time.map((data) => data), 
           datasets: [
             {
-              label: "Rain Sum",
-              data: weather.daily.rain_sum.map((data) => data/10),
+              label: "Average Temperature",
+              data: weather.daily.temperature_2m_max.map((data) => data),
               fill: true,
               borderColor: 'rgb(75, 192, 192)',
               // backgroundColor: 'rgba(255, 99, 71, 0.8)',
-              backgroundColor: 'blue',
+              backgroundColor: (context) =>{
+                const chart = context.chart;
+                const {ctx,chartArea}=chart;
+                if(!chartArea){
+                  return null;
+                }
+                return visualGradient(chart);
+              },
               tension: 0.1
             },
-            {
-                label: "Snowfall Sum",
-                data: weather.daily.snowfall_sum.map((data) => data),
-                fill: true,
-                borderColor: 'rgb(75, 192, 192)',
-                // backgroundColor: 'rgba(255, 99, 71, 0.8)',
-                backgroundColor: 'pink',
-                tension: 0.1
-              },
           ]
         }}
         options={{
@@ -38,7 +46,7 @@ const DisplayRainSnow = () => {
           plugins: {
             title: {
               display: true,
-              text: "Historical Rain and Snowfall Sum"
+              text: "Historical weather"
             },
             legend: {
               display: false
@@ -64,7 +72,7 @@ const DisplayRainSnow = () => {
               // stacked: true,
               title: {
                 display: true,
-                text: 'cm'
+                text: 'Temperature'
               }
             }
           }      
@@ -77,4 +85,4 @@ const DisplayRainSnow = () => {
     </div>
   );
 };
-export default DisplayRainSnow;
+export default DisplayTemp;

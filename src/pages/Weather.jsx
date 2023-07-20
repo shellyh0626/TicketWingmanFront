@@ -1,8 +1,8 @@
 import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions";
+import DisplayTemp from "../components/DisplayTemp";
 import DisplayWeather from "../components/DisplayWeather";
-import DisplayRainSnow from "../components/DisplayRainSnow";
 import { useLocation } from "react-router-dom";
 
 // example of accessing to weather page is shown below
@@ -40,8 +40,8 @@ function Weather() {
    
     return (
       <div>
+         <DisplayTemp/>
          <DisplayWeather/>
-         <DisplayRainSnow/>
       </div>
     );
 }
