@@ -6,11 +6,12 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
 import { ProtectedRoute } from "./utils/Auth";
-import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
+import Emission from "./pages/Emission";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather"
 
@@ -59,6 +60,11 @@ function App() {
                     Sign up
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to="/emission" className="nav-link mx-2">
+                    Emission Calculator
+                  </Link>
+                </li>
               </>
             )}
             {isLoggedIn && (
@@ -83,6 +89,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route element={<ProtectedRoute />}>
             <Route path="/profile/*" element={<Profile />} />
+            <Route path="/profile/edit" element={<EditProfile />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
@@ -90,6 +97,7 @@ function App() {
           <Route exact path="/" element={<SearchBar />} />
           <Route path="/searchResults" element={<SearchResults />} />
           <Route path="/weather" element={<Weather />} />
+          <Route path="/emission" element={<Emission />} />
         </Routes>
       </div>
     </Router>

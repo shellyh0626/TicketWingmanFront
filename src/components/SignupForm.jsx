@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../redux/users/user.actions";
+import { authSignup } from "../redux/users/user.actions";
 import { useNavigate } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -9,18 +9,15 @@ import Google from "../assets/google.png";
 const SignupForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.user.error);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = "signup";
     const firstName = evt.target.firstName.value;
     const lastName = evt.target.lastName.value;
-    const userName = evt.target.userName.value;
     const email = evt.target.email.value;
     const password = evt.target.password.value;
 
-    dispatch(auth(email, password, formName));
+    dispatch(authSignup(firstName, lastName, email, password));
     navigate("/");
   };
   return (
@@ -46,16 +43,6 @@ const SignupForm = () => {
             required
           />
           <label for="floatingInput">Last Name</label>
-        </div>
-        <div class="form-floating mb-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Username"
-            name="userName"
-            required
-          />
-          <label for="floatingInput">User Name</label>
         </div>
         <div class="form-floating mb-3">
           <input

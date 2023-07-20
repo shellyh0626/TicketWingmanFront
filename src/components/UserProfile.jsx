@@ -1,9 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { me } from "../redux/users/user.actions";
 import "../css/UserProfileCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
-function UserProfile(props) {
-  const { firstName, lastName, userName, email, password } = props;
+function UserProfile() {
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const handleEdit = () => {
+    navigate("/profile/edit");
+  };
+
+  useEffect(() => {
+    console.log(currentUser.email);
+    dispatch(me(currentUser.email));
+  }, [dispatch]);
+
   return (
     <div id="profileContainer">
       <img
@@ -20,9 +35,11 @@ function UserProfile(props) {
           type="text"
           class="form-control form-control-lg"
           placeholder="First name"
-          value={firstName}
+          readOnly
+          value ={currentUser.firstName}
+          defaultValue={currentUser.firstName}
         />
-        <div class="mb-3">
+        <div>
           <label id="profileLastName" class="form-label col-form-label-lg">
             Last Name
           </label>
@@ -31,19 +48,11 @@ function UserProfile(props) {
             type="text"
             class="form-control form-control-lg"
             placeholder="Last name"
-            value={lastName}
+            readOnly
+            value ={currentUser.lastName}
+            defaultValue={currentUser.lastName}
           />
         </div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label col-form-label-lg">Username</label>
-        <input
-          id="profileUserNameInput"
-          type="text"
-          class="form-control form-control-lg"
-          placeholder="Username"
-          value={userName}
-        />
       </div>
       <div class="mb-3">
         <label class="form-label col-form-label-lg">Email</label>
@@ -52,19 +61,26 @@ function UserProfile(props) {
           type="email"
           class="form-control form-control-lg"
           placeholder="Email"
-          value={email}
+          readOnly
+          value ={currentUser.email}
+          defaultValue={currentUser.email}
         />
       </div>
       <div class="mb-3">
-        <label class="form-label col-form-label-lg">Passowrd</label>
+        <label class="form-label col-form-label-lg">Password</label>
         <input
           id="profilePasswordInput"
           type="password"
           class="form-control form-control-lg"
           placeholder="Password"
-          value={password}
+          readOnly
+          value={currentUser.password}
+          defaultValue={currentUser.password}
         />
       </div>
+      <button type="button" class="btn btn-primary" onClick={handleEdit}>
+        <i class="bi bi-pen"></i> Edit Profile
+      </button>
     </div>
   );
 }

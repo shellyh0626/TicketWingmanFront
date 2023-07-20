@@ -1,6 +1,6 @@
 .search-bar {
   background: white;
-  width: 55%;
+  width: 65%;
   margin: 30px auto;
   padding: 20px 10px 20px 30px;
   border-radius: 10px;
@@ -10,12 +10,13 @@
   box-shadow: -1px 2px 3px 2px #cecdcd;
 }
 
-.search-bar input {
+.search-bar input,
+select {
   display: block;
   border: 0.25px solid #dbdbdb;
   border-radius: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding: 10px 5px;
+  outline: none;
 }
 
 .search-bar input::placeholder {
