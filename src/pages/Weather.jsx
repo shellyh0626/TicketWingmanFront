@@ -6,11 +6,11 @@ import DisplayRainSnow from "../components/DisplayRainSnow";
 import { useLocation } from "react-router-dom";
 
 // example of accessing to weather page is shown below
-//<Link to = "/weather" state ={{destination:"JFK",startingDate:"2023-09-01",endingDate:"2023-12-30"}}>weather</Link>
+//<Link to = "/weather" state ={{destination:"JFK",startingDate:"2023-09-01",endingDate:"2023-12-30",tempF:true}}>weather</Link>
 function Weather() {
     let weather = useSelector((state) => state.weather.weatherTemp);
     const location = useLocation();
-    const {destination,startingDate,endingDate} = location.state;
+    const {destination,startingDate,endingDate,tempF} = location.state;
     const dispatch = useDispatch();
 
     //Subtracts the year of the given date and returns the date string with the updated year
@@ -31,7 +31,11 @@ function Weather() {
             date2: minusYear(endingDate)
         };
         console.log("dispatch: historical weather");
-        dispatch(FETCH_WEATHER_F_THUNK(weatherObject));
+        if(tempF){
+            dispatch(FETCH_WEATHER_F_THUNK(weatherObject));
+        }else{
+            dispatch(FETCH_WEATHER_C_THUNK(weatherObject));
+        }
     }, [dispatch]);
    
     return (
