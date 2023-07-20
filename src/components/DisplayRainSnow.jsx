@@ -64,7 +64,7 @@ const DisplayRainSnow = () => {
               // stacked: true,
               title: {
                 display: true,
-                text: 'Temperature'
+                text: 'cm'
               }
             }
           }      
