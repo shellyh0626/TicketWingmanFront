@@ -2,6 +2,7 @@ import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions";
 import DisplayWeather from "../components/DisplayWeather";
+import DisplayRainSnow from "../components/DisplayRainSnow";
 
 function Weather() {
     let weather = useSelector((state) => state.weather.weatherTemp);
@@ -19,6 +20,7 @@ function Weather() {
     return (
       <div>
          <DisplayWeather/>
+         <DisplayRainSnow/>
       </div>
     );
 }
