@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {Bar} from "react-chartjs-2";
 Chart.register(CategoryScale);
 const DisplayWeather = () => {
-  const weather = useSelector((state) => state.weather.tempInFahrenheit);
+  const weather = useSelector((state) => state.weather.weatherTemp);
 
   function visualGradient(chart){
     const {ctx,chartArea:{top,bottom,left,right}} = chart;

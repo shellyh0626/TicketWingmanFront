@@ -4,7 +4,7 @@ import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/w
 import DisplayWeather from "../components/DisplayWeather";
 
 function Weather() {
-    let weather = useSelector((state) => state.weather.tempInFahrenheit);
+    let weather = useSelector((state) => state.weather.weatherTemp);
     const dispatch = useDispatch();
     useEffect(() => {
         const weatherObject = {
@@ -13,7 +13,7 @@ function Weather() {
             date2: "2022-12-30"
         };
         console.log("dispatch: historical weather");
-        dispatch(FETCH_WEATHER_F_THUNK(weatherObject));
+        dispatch(FETCH_WEATHER_C_THUNK(weatherObject));
     }, [dispatch]);
    
     return (
