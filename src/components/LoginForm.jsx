@@ -4,7 +4,7 @@ import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../redux/users/user.actions";
+import { authLogin } from "../redux/users/user.actions";
 import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
@@ -12,10 +12,9 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = "login";
     const email = evt.target.email.value;
     const password = evt.target.password.value;
-    dispatch(auth(email, password, formName));
+    dispatch(authLogin(email, password));
 
     navigate("/");
   };
