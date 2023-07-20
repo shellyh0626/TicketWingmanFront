@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -7,30 +7,25 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-import { ProtectedRoute } from "./utils/Auth";
+import ProtectedRoute from "./utils/Auth";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
 import Emission from "./pages/Emission";
+import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
-import Weather from "./pages/Weather"
-
-/* const LinkButton = ({ to, children, onClick }) => (
-  <NavLink to={to} onClick={onClick}>
-    {children}
-  </NavLink>
-); */
+import Weather from "./pages/Weather";
 
 function App() {
   const dispatch = useDispatch();
-  /* const navigate = useNavigate(); */
-  const isLoggedIn = useSelector((state) => !!state.user.id);
+  useEffect(() => {
+    const fetchMe = () => {
+      dispatch(me());
+    };
+    fetchMe();
+  }, [dispatch]);
 
-  /*   const handleLogOut = (e) => {
-    e.preventDefault();
-    dispatch(logout());
-    navigate("/login");
-  }; */
+  const isLoggedIn = useSelector((state) => !!state.user.id);
   return (
     <Router>
       <div className="App">
@@ -63,6 +58,19 @@ function App() {
                 <li className="nav-item">
                   <Link to="/emission" className="nav-link mx-2">
                     Emission Calculator
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link
+                    to="/weather"
+                    state={{
+                      destination: "JFK",
+                      startingDate: "2023-09-01",
+                      endingDate: "2023-12-30",
+                      tempF: true,
+                    }}
+                  >
+                    weather
                   </Link>
                 </li>
               </>
