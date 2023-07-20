@@ -30,7 +30,7 @@ export const FETCH_WEATHER_F_THUNK = (weatherObject) => {
             const result = await axios.post("http://localhost:8080/api/weather/displayInFahrenheit", weatherObject );
             console.log("fetch weather data in Fahrenheit COMPLETED")
             console.log(result);
-            dispatch(FETCH_WEATHER_F(result));
+            dispatch(FETCH_WEATHER_F(result.data));
         } catch (err) {
             console.error(err);
         }
@@ -44,7 +44,7 @@ export const FETCH_WEATHER_C_THUNK = (weatherObject) => {
             const result = await axios.post("http://localhost:8080/api/weather/displayInCelsius", weatherObject );
             console.log("fetch weather data in Celsius COMPLETED")
             console.log(result);
-            dispatch(FETCH_WEATHER_C(result));
+            dispatch(FETCH_WEATHER_C(result.data));
         } catch (err) {
             console.error(err);
         }

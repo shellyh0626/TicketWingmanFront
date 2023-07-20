@@ -13,6 +13,7 @@ import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
 import Emission from "./pages/Emission";
 import { logout } from "./redux/users/user.actions";
+import Weather from "./pages/Weather"
 
 /* const LinkButton = ({ to, children, onClick }) => (
   <NavLink to={to} onClick={onClick}>
@@ -95,6 +96,7 @@ function App() {
           <Route path="/forgot" element={<ForgotPassword />} />
           <Route exact path="/" element={<SearchBar />} />
           <Route path="/searchResults" element={<SearchResults />} />
+          <Route path="/weather" element={<Weather />} />
           <Route path="/emission" element={<Emission />} />
         </Routes>
       </div>
