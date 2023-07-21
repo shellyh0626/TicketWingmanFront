@@ -18,7 +18,7 @@ const editUser = (userEmail, updates) => ({
 
 export const me = (email) => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:8080/auth/me", {
+    const res = await axios.post("http://localhost:8080/auth/me", {
       email,
       withCredentials: true,
     });

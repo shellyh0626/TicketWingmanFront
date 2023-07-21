@@ -36,6 +36,7 @@ function UserProfile() {
           class="form-control form-control-lg"
           placeholder="First name"
           readOnly
+          value={currentUser.firstName}
           defaultValue={currentUser.firstName}
         />
         <div>
@@ -48,6 +49,7 @@ function UserProfile() {
             class="form-control form-control-lg"
             placeholder="Last name"
             readOnly
+            value={currentUser.lastName}
             defaultValue={currentUser.lastName}
           />
         </div>
@@ -60,6 +62,7 @@ function UserProfile() {
           class="form-control form-control-lg"
           placeholder="Email"
           readOnly
+          value={currentUser.email}
           defaultValue={currentUser.email}
         />
       </div>
@@ -71,6 +74,7 @@ function UserProfile() {
           class="form-control form-control-lg"
           placeholder="Password"
           readOnly
+          value={currentUser.password}
           defaultValue={currentUser.password}
         />
       </div>
