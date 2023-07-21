@@ -8,7 +8,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
 import ProtectedRoute from "./utils/Auth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import SearchResults from "./components/SearchResults";
 import SearchBar from "./components/SearchBar";
@@ -17,12 +17,6 @@ import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather";
 
-const LinkButton = ({ to, children, onClick }) => (
-  <NavLink to={to} onClick={onClick}>
-    {children}
-  </NavLink>
-);
-
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -30,7 +24,7 @@ function App() {
   const handleLogOut = (event) => {
     event.preventDefault();
     dispatch(logout());
-    navigate("/login");
+    navigate("/");
   };
 
   useEffect(() => {
@@ -98,9 +92,9 @@ function App() {
           )}
           {isLoggedIn && (
             <li className="nav-item">
-              <LinkButton className="nav-link mx-2" onClick={handleLogOut}>
+              <Link className="nav-link mx-2" onClick={handleLogOut}>
                 Logout
-              </LinkButton>
+              </Link>
             </li>
           )}
         </ul>
@@ -109,7 +103,7 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute isloggedIn={isLoggedIn} />}>
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
