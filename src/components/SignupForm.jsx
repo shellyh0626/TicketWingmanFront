@@ -79,10 +79,10 @@ const SignupForm = () => {
         </div>
       </div>
       <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-primary btn-lg">
+        <a href="http://localhost:8080/auth/google" type="button" class="btn btn-primary btn-lg">
           <img src={Google} alt="" className="google-button-icon" />
           <label className="google-button-text"> Login with Google</label>
-        </button>
+        </a>
       </div>
     </div>
   );
