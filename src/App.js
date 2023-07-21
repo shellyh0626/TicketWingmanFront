@@ -109,7 +109,7 @@ function App() {
       {/* Routes */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route element={<ProtectedRoute />}>
+        <Route element={<ProtectedRoute isloggedIn={isLoggedIn}/>}>
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
         </Route>
