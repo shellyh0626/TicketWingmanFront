@@ -23,7 +23,11 @@ const LoginForm = () => {
     <div id="formContainer">
       <h1 id="formHeading">Login</h1>
       <div class="d-grid gap-2 col-6 mx-auto">
-        <a href="http://localhost:8080/auth/google" type="button" class="btn btn-primary btn-lg">
+        <a
+          href="http://localhost:8080/auth/google"
+          type="button"
+          class="btn btn-primary btn-lg"
+        >
           <img src={Google} alt="" className="google-button-icon" />
           <label className="google-button-text"> Login with Google</label>
         </a>
