@@ -55,7 +55,7 @@ function UserProfile() {
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label col-form-label-lg">Email</label>
+        <label class="form-label col-form-label-lg">Email/Username</label>
         <input
           id="profileEmailInput"
           type="email"
