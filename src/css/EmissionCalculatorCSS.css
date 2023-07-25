@@ -1,0 +1,45 @@
+#emissionField {
+  display: grid;
+  justify-content: center;
+  width: 35%;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#emissionNumber {
+  border-width: 2px;
+  border-color: black;
+}
+#emissionContainer {
+  border: solid;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px;
+  display: table;
+}
+
+.emissionItem {
+  display: flex;
+}
+
+.emissionItem-Mobile {
+  margin-left: 10px;
+  display: flex;
+}
+
+.coInfo {
+  margin-left: 20px;
+}
+
+.coInfo-Mobile {
+  margin-left: 30px;
+}
+
+.coMessage {
+  font-size: 15px;
+}
+.coEmission {
+  font-size: 30px;
+  font-weight: bolder;
+}

@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
+import Github from "../assets/github-mark-white.png";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../redux/users/user.actions";
+import { authLogin } from "../redux/users/user.actions";
 import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
@@ -12,10 +13,9 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const formName = "login";
     const email = evt.target.email.value;
     const password = evt.target.password.value;
-    dispatch(auth(email, password, formName));
+    dispatch(authLogin(email, password));
 
     navigate("/");
   };
@@ -24,10 +24,14 @@ const LoginForm = () => {
     <div id="formContainer">
       <h1 id="formHeading">Login</h1>
       <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="button" class="btn btn-primary btn-lg">
+        <a href="http://localhost:8080/auth/google" type="button" class="btn btn-primary btn-lg">
           <img src={Google} alt="" className="google-button-icon" />
           <label className="google-button-text"> Login with Google</label>
-        </button>
+        </a>
+        <a href="http://localhost:8080/auth/github" type="button" class="btn btn-primary btn-lg">
+          <img src={Github} alt="" className="google-button-icon" />
+          <label className="google-button-text"> Login with Github</label>
+        </a>
       </div>
       <br />
       <div className="center">
