@@ -1,26 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
 import { useNavigate } from "react-router-dom";
 import { authLogin } from "../redux/users/user.actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetLoginError } from "../redux/users/user.actions";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSubmit = (evt) => {
+  const error = useSelector((state) => state.user.error);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loginAttempted, setLoginAttempted] = useState(false);
+
+  useEffect(() => {
+    if (loginAttempted) {
+      if (error === "Request failed with status code 401") {
+        setErrorMessage("Invalid email or password. Please try again.");
+      } else {
+        setErrorMessage("");
+        navigate("/");
+      }
+    }
+  }, [loginAttempted, error]);
+
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    dispatch(resetLoginError());
     const email = evt.target.email.value;
     const password = evt.target.password.value;
-    dispatch(authLogin(email, password));
 
-    navigate("/");
+    await dispatch(authLogin(email, password));
+    setLoginAttempted(true);
   };
 
   return (
     <div id="formContainer">
+      {errorMessage && <h1 id="errorLogin">{errorMessage}</h1>}
       <h1 id="formHeading">Login</h1>
       <div class="d-grid gap-2 col-6 mx-auto">
         <a
