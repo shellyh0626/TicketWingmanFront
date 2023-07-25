@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  updateSearchData,
+  searchFlights,
+} from "../redux/flights/search.action";
 import "../css/SearchBarCSS.css";
 import Search from "../assets/search.png";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   const navigate = useNavigate();
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
@@ -11,34 +16,28 @@ const SearchBar = () => {
   const [returnValue, setReturnValue] = useState("");
 
   const handleSubmit = () => {
-    const apiUrl = "http://localhost:8080/api/flights/search";
     const requestData = {
       originLocationCode: fromValue,
       destinationLocationCode: toValue,
       departureDate: departValue,
-      // returnDate: returnValue,
       adults: 1,
     };
-    //Sample search bar input:
-    //From: SYD
-    //To: BKK
-    //Depart: 08/02/2023
-    //Return: It can be any date, return date does not affect result
-
-    //Testing for get request:
-    // http://localhost:8080/api/flights/search?originLocationCode=fromValue&destinationLocationCode=toValue&departureDate=departValue
-    const searchParams = new URLSearchParams(requestData);
-    const urlWithParams = `${apiUrl}?${searchParams}`;
-    fetch(apiUrl + "?" + new URLSearchParams(requestData))
-      .then((response) => response.json())
-      .then((data) => {
-        navigate("/searchResults", { state: { data } }); //Jump to new page
-      })
-      .catch((error) => {
-        console.error(error);
-        // Handle request errors
-      });
+    // Add returnDate param to requestData（If it exists）
+    if (returnValue) {
+      requestData.returnDate = returnValue;
+    }
+    props.searchFlights(requestData);
   };
+
+  useEffect(() => {
+    // Output new data in the console for testing
+    console.log("Test", props.flights);
+
+    // Wait for Redux update data, then redirect to new page
+    if (props.flights && props.flights.length > 0) {
+      navigate("/searchResults", { state: { data: props.flights } });
+    }
+  }, [props.flights, navigate]);
 
   return (
     <div className="search-bar">
@@ -46,10 +45,10 @@ const SearchBar = () => {
         <label>From</label>
         <input
           type="text"
-          placeholder="Airport"
+          placeholder="Airport or City"
           className="inputField"
           value={fromValue}
-          onChange={(e) => setFromValue(e.target.value)}
+          onChange={(e) => setFromValue(e.target.value)} // Update fromValue
           required
         />
       </div>
@@ -57,10 +56,10 @@ const SearchBar = () => {
         <label>To</label>
         <input
           type="text"
-          placeholder="Airport"
+          placeholder="Airport or City"
           className="inputField"
           value={toValue}
-          onChange={(e) => setToValue(e.target.value)}
+          onChange={(e) => setToValue(e.target.value)} // Update toValue
           required
         />
       </div>
@@ -70,7 +69,7 @@ const SearchBar = () => {
           type="date"
           className="inputField"
           value={departValue}
-          onChange={(e) => setDepartValue(e.target.value)}
+          onChange={(e) => setDepartValue(e.target.value)} // Update departValue
           required
         />
       </div>
@@ -80,26 +79,9 @@ const SearchBar = () => {
           type="date"
           className="inputField"
           value={returnValue}
-          onChange={(e) => setReturnValue(e.target.value)}
+          onChange={(e) => setReturnValue(e.target.value)} // Update returnValue
           required
         />
-      </div>
-      <div>
-        <label>Type</label>
-        <select>
-          <option selected>One-way</option>
-          <option>Roundtrip</option>
-        </select>
-      </div>
-      <div>
-        <label>Flight Class</label>
-        <select>
-          <option>Economy</option>
-          <option>Premium_Economy</option>
-          <option>Business</option>
-          <option>First</option>
-          <option selected>Any</option>
-        </select>
       </div>
       <button type="submit" onClick={handleSubmit}>
         <img src={Search} alt="" />
@@ -108,4 +90,13 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar;
+const mapStateToProps = (state) => ({
+  flights: state.search.flights,
+});
+
+const mapDispatchToProps = {
+  updateSearchData,
+  searchFlights,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
