@@ -10,11 +10,13 @@ function EditInfo() {
   const currentUser = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
 
   const [userData, setUserData] = useState({
     firstName: currentUser.firstName,
     lastName: currentUser.lastName,
     email: currentUser.email,
+    newPassword: "",
   });
 
   const handleChange = (event) => {
@@ -24,13 +26,24 @@ function EditInfo() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(editUserThunk(currentUser.email, userData)); // Pass currentUser.email as the first argument
+
+    const updatedUserData = {
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      password: userData.newPassword,
+    };
+
+    console.log("Updated User Data:", updatedUserData);
+    dispatch(editUserThunk(currentUser.email, updatedUserData));
 
     setUserData({
       firstName: "",
       lastName: "",
       email: "",
+      newPassword: "",
     });
+    setVisible(false);
 
     navigate("/profile/");
   };
@@ -83,20 +96,32 @@ function EditInfo() {
             onChange={handleChange}
           />
         </div>
-        <div class="mb-3">
+        <div class="mb-1">
           <label class="form-label col-form-label-lg">Password</label>
           <input
             id="profilePasswordInput"
-            type="password"
+            type={visible ? "text" : "password"}
+            name="newPassword"
             class="form-control form-control-lg"
             placeholder="Password"
-            readOnly
-            defaultValue={currentUser.password}
+            value={userData.password}
+            onChange={handleChange}
           />
         </div>
-        <button type="submit" class="btn btn-primary" onClick={handleSubmit}>
-          <i class="bi bi-pen"></i> Edit Profile
-        </button>
+        <div class="mb-2">
+          <button
+            type="button"
+            class="btn btn-light btn-sm"
+            onClick={() => setVisible(!visible)}
+          >
+            <i class="bi bi-eye" /> Show Password
+          </button>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-success" onClick={handleSubmit}>
+            <i class="bi bi-pen"></i> Edit Profile
+          </button>
+        </div>
       </form>
     </div>
   );

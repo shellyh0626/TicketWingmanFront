@@ -5,6 +5,8 @@ axios.defaults.withCredentials = true;
 const GET_USER = "GET_USER";
 const REMOVE_USER = "REMOVE_USER";
 const EDIT_USER = "EDIT_USER";
+const LOGIN_ERROR = "LOGIN_ERROR";
+const RESET_LOGIN_ERROR = "RESET_LOGIN_ERROR";
 
 const getUser = (user) => ({ type: GET_USER, user });
 const removeUser = () => ({ type: REMOVE_USER });
@@ -15,6 +17,8 @@ const editUser = (userEmail, updates) => ({
     updates: updates,
   },
 });
+const loginError = (error) => ({ type: LOGIN_ERROR, payload: error });
+const resetLoginError = () => ({ type: RESET_LOGIN_ERROR });
 
 export const me = (email) => async (dispatch) => {
   try {
@@ -59,7 +63,7 @@ export const authLogin = (email, password) => async (dispatch) => {
       password,
     });
   } catch (authError) {
-    return dispatch(getUser({ error: authError }));
+    return dispatch(loginError(authError.message));
   }
 
   try {
@@ -92,3 +96,5 @@ export const editUserThunk = (userEmail, updates) => {
     }
   };
 };
+
+export { resetLoginError };
