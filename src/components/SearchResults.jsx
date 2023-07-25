@@ -342,10 +342,14 @@ const SearchResults = () => {
                   <p>Flight number: {ticket.flight_number}</p>
                   <p>Duration: {ticket.duration}</p>
                   <p>Cabin: {ticket.cabin}</p>
-                  <p>
-                    Carbon dioxide emission:{" "}
-                    {parseFloat(ticket.emissions || 0).toFixed(2)} kg
-                  </p>
+                  {parseFloat(ticket.emissions) === -1 ? (
+                    <p>Emission: unknown</p>
+                  ) : (
+                    <p>
+                      Carbon dioxide emission:{" "}
+                      {(parseFloat(ticket.emissions) / 1000).toFixed(2)} kg
+                    </p>
+                  )}
                   <p>
                     Layover info:{" "}
                     {i === flight.tickets.departure_ticket.length - 1
@@ -390,10 +394,15 @@ const SearchResults = () => {
                         <p>Flight number: {ticket.flight_number}</p>
                         <p>Duration: {ticket.duration}</p>
                         <p>Cabin: {ticket.cabin}</p>
-                        <p>
-                          Carbon dioxide emission:{" "}
-                          {parseFloat(ticket.emissions || 0).toFixed(2)} kg
-                        </p>
+                        {parseFloat(ticket.emissions) === -1 ? (
+                          <p>Emission: unknown</p>
+                        ) : (
+                          <p>
+                            Carbon dioxide emission:{" "}
+                            {(parseFloat(ticket.emissions) / 1000).toFixed(2)}{" "}
+                            kg
+                          </p>
+                        )}
                         <p>
                           Layover info:{" "}
                           {i === flight.tickets.return_ticket.length - 1
