@@ -10,6 +10,7 @@ import Search from "../assets/search.png";
 
 const SearchBar = (props) => {
   const navigate = useNavigate();
+  // Use useState to define data
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
   const [departValue, setDepartValue] = useState("");
@@ -31,11 +32,18 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     // Output new data in the console for testing
-    console.log("Test", props.flights);
+    console.log("Click on search button then transport data", props.flights);
 
     // Wait for Redux update data, then redirect to new page
-    if (props.flights && props.flights.length > 0) {
-      navigate("/searchResults", { state: { data: props.flights } });
+    if (
+      props.flights &&
+      props.flights.countryData &&
+      props.flights.travelAdvisoryData
+    ) {
+      console.log("Page directed successfully");
+      navigate("/SearchResults", { state: { data: props.flights } });
+    } else {
+      console.log("Page directed unsuccessfully");
     }
   }, [props.flights, navigate]);
 
@@ -82,6 +90,13 @@ const SearchBar = (props) => {
           onChange={(e) => setReturnValue(e.target.value)} // Update returnValue
           required
         />
+      </div>
+      <div>
+        <label>Type</label>
+        <select>
+          <option value="One-way">One-way</option>
+          <option value="Roundtrip">Roundtrip</option>
+        </select>
       </div>
       <button type="submit" onClick={handleSubmit}>
         <img src={Search} alt="" />
