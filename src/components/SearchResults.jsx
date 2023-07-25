@@ -109,16 +109,23 @@ const SearchResults = () => {
   };
 
   const calculateTotalEmissions = (flight) => {
-    const totalEmissionsInGrams = flight.tickets.departure_ticket.reduce(
-      (accumulator, ticket) => accumulator + parseFloat(ticket.emissions || 0),
-      0
+    const hasUnknownEmissions = flight.tickets.departure_ticket.some(
+      (ticket) => parseFloat(ticket.emissions) === -1
     );
-    const totalEmissionsInKilograms = totalEmissionsInGrams / 1000; // Convert gram to kilogram
-    if (totalEmissionsInKilograms >= 0) {
-      return totalEmissionsInKilograms.toFixed(2); // Preserve two decimal places
-    } else {
+
+    if (hasUnknownEmissions) {
       return "unknown";
     }
+
+    const totalEmissionsInGrams = flight.tickets.departure_ticket.reduce(
+      (accumulator, ticket) => {
+        return accumulator + parseFloat(ticket.emissions || 0);
+      },
+      0
+    );
+
+    const totalEmissionsInKilograms = totalEmissionsInGrams / 1000; // Convert gram to kilogram
+    return totalEmissionsInKilograms.toFixed(2); // Preserve two decimal places
   };
 
   const calculateLayoverTime = (flight) => {
