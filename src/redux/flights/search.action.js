@@ -23,12 +23,13 @@ export const searchFlights = (requestData) => async (dispatch) => {
   try {
     console.log("Request address:" + urlWithParams);
     // async await request with axios. Then wait for the result
+    axios.defaults.withCredentials = false;
     const response = await axios.get(urlWithParams);
     console.log(response.data);
 
     let destinationCountryCode = null;
     response.data.some((flight) => {
-      if (flight.oneWay || !flight.tickets.departure_ticket.length) {
+      if (!flight.tickets.departure_ticket.length) {
         // If non stop flight, return the country code of the arrival destination
         destinationCountryCode =
           flight.tickets.departure_ticket[0].arrival.location.countryCode;
@@ -46,6 +47,7 @@ export const searchFlights = (requestData) => async (dispatch) => {
     });
     console.log("Arrival country's country code:" + destinationCountryCode);
     // Use arrival destination in flight tickets to check travel advisory api
+    axios.defaults.withCredentials = false;
     const secondApiUrl = `https://www.travel-advisory.info/api?countrycode=${destinationCountryCode}`;
     const secondResponse = await axios.get(secondApiUrl);
     console.log("Travel Advisory:" + JSON.stringify(secondResponse.data));
