@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../css/FormCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Google from "../assets/google.png";
+import Github from "../assets/github-mark-white.png";
 import { useNavigate } from "react-router-dom";
 import { authLogin } from "../redux/users/user.actions";
 import { useDispatch } from "react-redux";
@@ -26,6 +27,10 @@ const LoginForm = () => {
         <a href="http://localhost:8080/auth/google" type="button" class="btn btn-primary btn-lg">
           <img src={Google} alt="" className="google-button-icon" />
           <label className="google-button-text"> Login with Google</label>
+        </a>
+        <a href="http://localhost:8080/auth/github" type="button" class="btn btn-primary btn-lg">
+          <img src={Github} alt="" className="google-button-icon" />
+          <label className="google-button-text"> Login with Github</label>
         </a>
       </div>
       <br />
