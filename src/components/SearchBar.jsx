@@ -7,45 +7,81 @@ import {
 } from "../redux/flights/search.action";
 import "../css/SearchBarCSS.css";
 import Search from "../assets/search.png";
+import { addDays, format } from "date-fns"; // Use npm install date-fns to import this package from npm
 
 const SearchBar = (props) => {
   const navigate = useNavigate();
   // Use useState to define data
+  // Use useState to define data
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
-  const [departValue, setDepartValue] = useState("");
+  const [departValue, setDepartValue] = useState(
+    format(new Date(), "yyyy-MM-dd")
+  );
   const [returnValue, setReturnValue] = useState("");
+  const [type, setType] = useState("One-way"); // Add the state of type. The default will be one-way
+
+  const [hasSearched, setHasSearched] = useState(false); // A hook that tracks if the user searched their input
+
+  const handleChangeFrom = (e) => {
+    const inputValue = e.target.value.toUpperCase(); // If user input is lowercase, convert it to uppercase
+    setFromValue(inputValue);
+  };
+
+  const handleChangeTo = (e) => {
+    const inputValue = e.target.value.toUpperCase(); // If user input is lowercase, convert it to uppercase
+    setToValue(inputValue);
+  };
 
   const handleSubmit = () => {
+    if (fromValue === "") {
+      alert("Please fill in the departure airport or city.");
+      return;
+    }
+    if (toValue === "") {
+      alert("Please fill in the arrival airport or city.");
+      return;
+    }
     const requestData = {
       originLocationCode: fromValue,
       destinationLocationCode: toValue,
       departureDate: departValue,
       adults: 1,
     };
-    // Add returnDate param to requestData（If it exists）
-    if (returnValue) {
+    if (returnValue && type === "Roundtrip") {
       requestData.returnDate = returnValue;
     }
     props.searchFlights(requestData);
+    setHasSearched(true); // Already searched
   };
 
   useEffect(() => {
     // Output new data in the console for testing
     console.log("Click on search button then transport data", props.flights);
+    console.log("Click on search button then transport data", props.flights);
 
     // Wait for Redux update data, then redirect to new page
     if (
+      hasSearched &&
       props.flights &&
       props.flights.countryData &&
       props.flights.travelAdvisoryData
     ) {
-      console.log("Page directed successfully");
+      console.log("Directed successfully to search result page");
       navigate("/SearchResults", { state: { data: props.flights } });
     } else {
-      console.log("Page directed unsuccessfully");
+      console.log("Directed unsuccessfully");
     }
-  }, [props.flights, navigate]);
+  }, [hasSearched, props.flights, navigate]);
+
+  useEffect(() => {
+    // When flight type or trip type changes, return date value changes
+    if (type === "One-way") {
+      setReturnValue(""); // Clear return date value
+    } else if (type === "Roundtrip") {
+      setReturnValue(format(addDays(new Date(), 3), "yyyy-MM-dd")); // Set the return date to three days after departure date
+    }
+  }, [type]);
 
   return (
     <div className="search-bar">
@@ -56,7 +92,7 @@ const SearchBar = (props) => {
           placeholder="Airport or City"
           className="inputField"
           value={fromValue}
-          onChange={(e) => setFromValue(e.target.value)} // Update fromValue
+          onChange={handleChangeFrom} // Update fromValue
           required
         />
       </div>
@@ -67,7 +103,7 @@ const SearchBar = (props) => {
           placeholder="Airport or City"
           className="inputField"
           value={toValue}
-          onChange={(e) => setToValue(e.target.value)} // Update toValue
+          onChange={handleChangeTo} // Update toValue
           required
         />
       </div>
@@ -87,13 +123,16 @@ const SearchBar = (props) => {
           type="date"
           className="inputField"
           value={returnValue}
-          onChange={(e) => setReturnValue(e.target.value)} // Update returnValue
-          required
+          onChange={(e) => setReturnValue(e.target.value)}
+          required={type === "Roundtrip"} // When the trip or flight type is Roundtrip, return value will be required
         />
       </div>
       <div>
         <label>Type</label>
-        <select>
+        <select
+          value={type} // Assign the currently selected type, or one-way
+          onChange={(e) => setType(e.target.value)} // Update the state of type
+        >
           <option value="One-way">One-way</option>
           <option value="Roundtrip">Roundtrip</option>
         </select>
