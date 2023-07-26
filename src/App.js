@@ -93,15 +93,15 @@ function App() {
           )}
           {isLoggedIn && (
             <li className="nav-item">
-              <Link className="nav-link mx-2" onClick={handleLogOut}>
-                Logout
+              <Link to="/userflights" className="nav-link mx-2">
+                User's Flights
               </Link>
             </li>
           )}
           {isLoggedIn && (
             <li className="nav-item">
-              <Link to="/userflights" className="nav-link mx-2">
-                User's Flights
+              <Link className="nav-link mx-2" onClick={handleLogOut}>
+                Logout
               </Link>
             </li>
           )}
