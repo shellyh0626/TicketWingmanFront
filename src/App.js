@@ -17,6 +17,7 @@ import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather";
 import UserFlights from "./pages/UserFlights";
+import InsertFlight from "./pages/InsertFlight";
 
 function App() {
   const dispatch = useDispatch();
@@ -123,6 +124,7 @@ function App() {
         <Route path="/searchResults" element={<SearchResults />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/emission" element={<Emission />} />
+        <Route path="/newFlights" element={<InsertFlight />} />
       </Routes>
     </div>
   );
