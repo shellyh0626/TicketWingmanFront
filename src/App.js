@@ -16,6 +16,7 @@ import Emission from "./pages/Emission";
 import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather";
+import Track from "./pages/Track";
 
 function App() {
   const dispatch = useDispatch();
@@ -81,6 +82,11 @@ function App() {
                   weather
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/track" className="nav-link mx-2">
+                  Track
+                </Link>
+              </li>
             </>
           )}
           {isLoggedIn && (
@@ -114,6 +120,7 @@ function App() {
         <Route path="/searchResults" element={<SearchResults />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/emission" element={<Emission />} />
+        <Route path="/track" element={<Track />} />
       </Routes>
     </div>
   );

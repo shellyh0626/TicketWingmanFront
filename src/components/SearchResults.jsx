@@ -13,17 +13,16 @@ const SearchResults = () => {
   console.log("Flight's data" + JSON.stringify(data));
   const [expandedFlightIndex, setExpandedFlightIndex] = useState(-1);
 
-  // Check if data exists and if it is an array
-  if (!data || !Array.isArray(data)) {
-    return <p>No data</p>;
-  }
-
   // const [expandedFlightIndex, setExpandedFlightIndex] = use
   const [selectedCabin, setSelectedCabin] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedStopovers, setSelectedStopovers] = useState("");
   const [selectedEmissions, setSelectedEmissions] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
+  // Check if data exists and if it is an array
+  if (!data || !Array.isArray(data)) {
+    return <p>No data</p>;
+  }
 
   const filteredData = data.filter((flight) => {
     // Filter based on flight cabin
