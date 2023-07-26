@@ -17,7 +17,7 @@ const DisplayTemp = () => {
   }
 
   return (
-    <div style={{width:1500}}>
+    <div style={{width:1400}}>
       {weather.length!==0?
       (<Bar
         data={{labels: weather.daily.time.map((data) => data), 
@@ -45,7 +45,7 @@ const DisplayTemp = () => {
           plugins: {
             title: {
               display: true,
-              text: "Historical weather"
+              text: "Historical weather From Past Year"
             },
             legend: {
               display: false

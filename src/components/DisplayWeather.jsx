@@ -7,7 +7,7 @@ const DisplayWeather = () => {
   const weather = useSelector((state) => state.weather.weatherTemp);
 
   return (
-    <div style={{width:1500}}>
+    <div style={{width:1400}}>
       {weather.length!==0?
       (<Line
         data={{labels: weather.daily.time.map((data) => data), 
@@ -37,7 +37,7 @@ const DisplayWeather = () => {
           plugins: {
             title: {
               display: true,
-              text: "Historical Rain and Snowfall Sum"
+              text: "Historical Rain and Snowfall Sum From Past Year"
             },
             legend: {
               display: false

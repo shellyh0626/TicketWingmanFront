@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions";
+import DisplayTemp from "./DisplayTemp";
+import DisplayWeather from "./DisplayWeather";
 
 const SearchResults = () => {
   // console.log("Render Search Results page");
   const location = useLocation();
+  const dispatch = useDispatch();
   const dataMart = location.state && location.state.data; //Returned data
   const countryData = dataMart && dataMart.countryData; // Country's data
   const data = dataMart && dataMart.travelAdvisoryData; // Flights' data
@@ -18,6 +22,15 @@ const SearchResults = () => {
   const [selectedStopovers, setSelectedStopovers] = useState("");
   const [selectedEmissions, setSelectedEmissions] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
+
+  useEffect(() => {
+    var tempF = true;
+    if(tempF){
+        dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
+    }else{
+        dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
+    }
+}, [dispatch]);
 
   // Check if data exists and if it is an array
   if (!data || !Array.isArray(data)) {
@@ -290,7 +303,8 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
-
+        <DisplayTemp/>
+        <DisplayWeather/>
         <div>
           {filteredData.map((flight, index) => (
             <div
