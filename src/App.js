@@ -17,6 +17,8 @@ import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather";
 import Track from "./pages/Track";
+import UserFlights from "./pages/UserFlights";
+import InsertFlight from "./pages/InsertFlight";
 
 function App() {
   const dispatch = useDispatch();
@@ -98,6 +100,13 @@ function App() {
           )}
           {isLoggedIn && (
             <li className="nav-item">
+              <Link to="/userflights" className="nav-link mx-2">
+                User's Flights
+              </Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className="nav-item">
               <Link className="nav-link mx-2" onClick={handleLogOut}>
                 Logout
               </Link>
@@ -112,6 +121,7 @@ function App() {
         <Route element={<ProtectedRoute isloggedIn={isLoggedIn} />}>
           <Route path="/profile/*" element={<Profile />} />
           <Route path="/profile/edit" element={<EditProfile />} />
+          <Route path="/userflights" element={<UserFlights />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
@@ -121,6 +131,7 @@ function App() {
         <Route path="/weather" element={<Weather />} />
         <Route path="/emission" element={<Emission />} />
         <Route path="/track" element={<Track />} />
+        <Route path="/newFlights" element={<InsertFlight />} />
       </Routes>
     </div>
   );

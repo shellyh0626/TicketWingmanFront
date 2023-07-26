@@ -3,6 +3,8 @@ import {
   UPDATE_SEARCH_DATA,
   SEARCH_FLIGHTS_SUCCESS,
   SEARCH_FLIGHTS_FAILURE,
+  DISPLAY_USER_FLIGHTS,
+  INSERT_USER_FLIGHTS,
 } from "./search.types";
 
 export const updateSearchData = (
@@ -23,12 +25,13 @@ export const searchFlights = (requestData) => async (dispatch) => {
   try {
     console.log("Request address:" + urlWithParams);
     // async await request with axios. Then wait for the result
+    axios.defaults.withCredentials = false;
     const response = await axios.get(urlWithParams);
     console.log(response.data);
 
     let destinationCountryCode = null;
     response.data.some((flight) => {
-      if (flight.oneWay || !flight.tickets.departure_ticket.length) {
+      if (!flight.tickets.departure_ticket.length) {
         // If non stop flight, return the country code of the arrival destination
         destinationCountryCode =
           flight.tickets.departure_ticket[0].arrival.location.countryCode;
@@ -46,6 +49,7 @@ export const searchFlights = (requestData) => async (dispatch) => {
     });
     console.log("Arrival country's country code:" + destinationCountryCode);
     // Use arrival destination in flight tickets to check travel advisory api
+    axios.defaults.withCredentials = false;
     const secondApiUrl = `https://www.travel-advisory.info/api?countrycode=${destinationCountryCode}`;
     const secondResponse = await axios.get(secondApiUrl);
     console.log("Travel Advisory:" + JSON.stringify(secondResponse.data));
@@ -61,3 +65,26 @@ export const searchFlights = (requestData) => async (dispatch) => {
     dispatch({ type: SEARCH_FLIGHTS_FAILURE, payload: error.message });
   }
 };
+
+export const displayUserFlight = (userID) =>{
+  return async(dispatch)=>{
+    try{
+      const result = await axios.get(`http://localhost:8080/api/flights?id=${userID}`);
+      dispatch({type:DISPLAY_USER_FLIGHTS, payload:result.data});
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+}
+
+export const insertUserFlight = (userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class) => {
+  return async(dispatch) => {
+    try{
+      const result = await axios.post("http://localhost:8080/api/flights/newflight",{userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class});
+      dispatch({type:INSERT_USER_FLIGHTS, payload:result});
+    }catch(err){
+      console.log(err);
+    }
+  }
+}

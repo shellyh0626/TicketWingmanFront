@@ -17,8 +17,7 @@ const DisplayTemp = () => {
   }
 
   return (
-    <div style={{width:700}}>
-      {console.log(weather)}
+    <div style={{width:1400}}>
       {weather.length!==0?
       (<Bar
         data={{labels: weather.daily.time.map((data) => data), 
@@ -46,7 +45,7 @@ const DisplayTemp = () => {
           plugins: {
             title: {
               display: true,
-              text: "Historical weather"
+              text: "Historical weather From Past Year"
             },
             legend: {
               display: false
@@ -65,14 +64,30 @@ const DisplayTemp = () => {
             x: {
               title: {
                 display: true,
-                text: 'Day'
-              }
+                text: 'Day',
+                font: {
+                  family: 'Times',
+                  size: 20,
+                  style: 'normal',
+                  lineHeight: 1.2
+                },
+              },
+              time: {
+                // Luxon format string
+                tooltipFormat: 'DD T'
+              },
             },
             y: {
               // stacked: true,
               title: {
                 display: true,
-                text: 'Temperature'
+                text: 'Temperature',
+                font: {
+                  family: 'Times',
+                  size: 20,
+                  style: 'normal',
+                  lineHeight: 1.2
+                },
               }
             }
           }      
