@@ -22,12 +22,11 @@ export const FETCH_WEATHER_C = (payload) => {
 //     date1:"2023-01-01",
 //     date2: "2023-07-08"
 // };
-export const FETCH_WEATHER_F_THUNK = (weatherObject) => {
-    console.log(weatherObject);
+export const FETCH_WEATHER_F_THUNK = (locationName) => {
     return async (dispatch) => {
         try {
             console.log("fetch weather data in Fahrenheit started");
-            const result = await axios.post("http://localhost:8080/api/weather/displayInFahrenheit", weatherObject );
+            const result = await axios.post("http://localhost:8080/api/weather/displayInFahrenheit", {locationName} );
             console.log("fetch weather data in Fahrenheit COMPLETED")
             console.log(result);
             dispatch(FETCH_WEATHER_F(result.data));
@@ -37,11 +36,11 @@ export const FETCH_WEATHER_F_THUNK = (weatherObject) => {
     };
 }
 
-export const FETCH_WEATHER_C_THUNK = (weatherObject) => {
+export const FETCH_WEATHER_C_THUNK = (locationName) => {
     return async (dispatch) => {
         try {
             console.log("fetch weather data in Celsius started");
-            const result = await axios.post("http://localhost:8080/api/weather/displayInCelsius", weatherObject );
+            const result = await axios.post("http://localhost:8080/api/weather/displayInCelsius", {locationName} );
             console.log("fetch weather data in Celsius COMPLETED")
             console.log(result);
             dispatch(FETCH_WEATHER_C(result.data));
