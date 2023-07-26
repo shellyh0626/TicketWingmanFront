@@ -11,6 +11,7 @@ import { addDays, format } from "date-fns"; // Use npm install date-fns to impor
 
 const SearchBar = (props) => {
   const navigate = useNavigate();
+  // Use useState to define data
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
   const [departValue, setDepartValue] = useState(
@@ -55,7 +56,7 @@ const SearchBar = (props) => {
 
   useEffect(() => {
     // Output new data in the console for testing
-    console.log("Test", props.flights);
+    console.log("Click on search button then transport data", props.flights);
 
     // Wait for Redux update data, then redirect to new page
     if (
