@@ -78,10 +78,10 @@ export const displayUserFlight = (userID) =>{
   }
 }
 
-export const insertUserFlight = (userEmail,carrierCode,flightNumber,scheduledDepartureDate) => {
+export const insertUserFlight = (userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class) => {
   return async(dispatch) => {
     try{
-      const result = await axios.post("http://localhost:8080/api/flights/newflight",{userEmail,carrierCode,flightNumber,scheduledDepartureDate});
+      const result = await axios.post("http://localhost:8080/api/flights/newflight",{userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class});
       dispatch({type:INSERT_USER_FLIGHTS, payload:result});
     }catch(err){
       console.log(err);
