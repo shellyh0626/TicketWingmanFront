@@ -13,7 +13,6 @@ const SearchResults = () => {
   console.log("Flight's data" + JSON.stringify(data));
   const [expandedFlightIndex, setExpandedFlightIndex] = useState(-1);
 
-  // const [expandedFlightIndex, setExpandedFlightIndex] = use
   const [selectedCabin, setSelectedCabin] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedStopovers, setSelectedStopovers] = useState("");
@@ -46,7 +45,17 @@ const SearchResults = () => {
         return false;
       } else if (selectedPrice === "300-600" && (price < 300 || price >= 600)) {
         return false;
-      } else if (selectedPrice === "600-above" && price < 600) {
+      } else if (
+        selectedPrice === "600-1000" &&
+        (price < 600 || price >= 1000)
+      ) {
+        return false;
+      } else if (
+        selectedPrice === "1000-1500" &&
+        (price < 1000 || price >= 1500)
+      ) {
+        return false;
+      } else if (selectedPrice === "1500-above" && price < 1500) {
         return false;
       }
     }
@@ -133,8 +142,8 @@ const SearchResults = () => {
     const layoverStations = departureTickets.length - 1;
 
     if (layoverStations === 0) {
-      // Non stop flight does not have layover time
-      return "Non stop";
+      // Non-stop flight does not have layover time
+      return "Non-stop";
     } else {
       // Calculate layover time
       let layoverTimeMinutes = 0;
@@ -149,12 +158,12 @@ const SearchResults = () => {
 
       if (layoverTimeMinutes < 0) {
         // Prevent the appearance of negative time result
-        return "non stop";
+        return "non-stop";
       } else {
         const layoverHours = Math.floor(layoverTimeMinutes / 60);
         const layoverMinutes = layoverTimeMinutes % 60;
         const layoverInfo =
-          layoverStations > 1 ? `(${layoverStations}stop)` : "";
+          layoverStations > 1 ? `(${layoverStations} stops)` : "";
         return `${layoverHours}H${layoverMinutes}M ${layoverInfo}`;
       }
     }
@@ -162,9 +171,10 @@ const SearchResults = () => {
 
   return (
     <div>
-      <div style={{ padding: "20px" }}>
+      <div
+        style={{ textAlign: "center", marginBottom: "20px", padding: "20px" }}
+      >
         <div style={{ display: "inline-block", marginRight: "20px" }}>
-          <label htmlFor="cabinSelect">Cabin: </label>
           <select
             id="cabinSelect"
             value={selectedCabin}
@@ -173,47 +183,42 @@ const SearchResults = () => {
             <option value="">Cabins</option>
             <option value="ECONOMY">Economy</option>
             <option value="BUSINESS">Business</option>
+            <option value="PREMIUM_ECONOMY">Premium Economy</option>
+            <option value="FIRST">First</option>
           </select>
         </div>
         <div style={{ display: "inline-block", marginRight: "20px" }}>
-          <label htmlFor="stopoversSelect">Stops: </label>
           <select
             id="stopoversSelect"
             value={selectedStopovers}
             onChange={(e) => setSelectedStopovers(e.target.value)}
           >
             <option value="">Stops</option>
-            <option value="direct">non stop</option>
-            <option value="1-stop">one stop</option>
-            <option value="2-stops">two stop</option>
+            <option value="direct">Non-stop</option>
+            <option value="1-stop">One stop</option>
+            <option value="2-stops">Two stop</option>
           </select>
         </div>
         <div style={{ display: "inline-block", marginRight: "20px" }}>
-          <label htmlFor="emissionsSelect">
-            carbon dioxide emission (kg):{" "}
-          </label>
           <select
             id="emissionsSelect"
             value={selectedEmissions}
             onChange={(e) => setSelectedEmissions(e.target.value)}
           >
-            <option value="">Emission</option>
-            <option value="100">100 and below</option>
-            <option value="200">200 and below</option>
-            <option value="500">500 and below</option>
-            <option value="1000">1000 and below</option>
+            <option value="">Emissions</option>
+            <option value="100">100kg and below</option>
+            <option value="200">200kg and below</option>
+            <option value="500">500kg and below</option>
+            <option value="1000">1000kg and below</option>
           </select>
         </div>
         <div style={{ display: "inline-block", marginRight: "20px" }}>
-          <label htmlFor="durationSelect">
-            Total depature duration (hour):{" "}
-          </label>
           <select
             id="durationSelect"
             value={selectedDuration}
             onChange={(e) => setSelectedDuration(e.target.value)}
           >
-            <option value="">All</option>
+            <option value="">Total departure duration</option>
             <option value="2">2hr and below</option>
             <option value="4">4hr and below</option>
             <option value="6">6hr and below</option>
@@ -221,7 +226,6 @@ const SearchResults = () => {
           </select>
         </div>
         <div style={{ display: "inline-block", marginRight: "20px" }}>
-          <label htmlFor="priceSelect">Price choices: </label>
           <select
             id="priceSelect"
             value={selectedPrice}
@@ -231,48 +235,59 @@ const SearchResults = () => {
             <option value="100-below">100 and below</option>
             <option value="100-200">100 - 200</option>
             <option value="200-300">200 - 300</option>
-            <option value="300-above">300 and above</option>
-            {/* More options can be add */}
+            <option value="300-600">300 - 600</option>
+            <option value="600-1000">600 - 1000</option>
+            <option value="1000-1500">1000 - 1500</option>
+            <option value="1500-above">1500 and above</option>
           </select>
         </div>
+        <div>
+          <div
+            style={{
+              border: "1px solid #ccc",
+              padding: "10px",
+              marginTop: "10px",
+              marginBottom: "10px",
+            }}
+          >
+            <h3>
+              Travel Advisory: {dataMart && countryData.data[countryCode].name}
+            </h3>
+            <div>
+              <p style={{ marginBottom: "2.5px" }}>
+                <strong style={{ fontWeight: 600 }}>Risk level:</strong>{" "}
+                {dataMart && countryData.data[countryCode].advisory.score}
+              </p>
+              <p style={{ marginBottom: "2.5px" }}>
+                <strong style={{ fontWeight: 600 }}>
+                  Risk level description:
+                </strong>{" "}
+                {dataMart && countryData.data[countryCode].advisory.message}
+              </p>
+              <p style={{ marginBottom: "2.5px" }}>
+                <strong style={{ fontWeight: 600 }}>Advisories found:</strong>{" "}
+                {dataMart &&
+                  countryData.data[countryCode].advisory.sources_active}
+              </p>
+              <p style={{ marginBottom: "2.5px" }}>
+                <strong style={{ fontWeight: 600 }}>Updated time:</strong>{" "}
+                {dataMart && countryData.data[countryCode].advisory.updated}
+              </p>
 
-        <div
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            marginBottom: "10px",
-          }}
-        >
-          <h2>Travel advisory</h2>
-          <p>Country name: {dataMart && countryData.data[countryCode].name}</p>
-          <div>
-            <h3>Info</h3>
-            <p>
-              Score: {dataMart && countryData.data[countryCode].advisory.score}
-            </p>
-            <p>
-              Sources active:
-              {dataMart &&
-                countryData.data[countryCode].advisory.sources_active}
-            </p>
-            <p>
-              Message:
-              {dataMart && countryData.data[countryCode].advisory.message}
-            </p>
-            <p>
-              Updated time:
-              {dataMart && countryData.data[countryCode].advisory.updated}
-            </p>
-
-            <p>
-              Source:
-              <a
-                href={dataMart && countryData.data[countryCode].advisory.source}
-                target="_blank"
-              >
-                {dataMart && countryData.data[countryCode].advisory.source}
-              </a>
-            </p>
+              <p style={{ marginBottom: "2.5px" }}>
+                <strong style={{ fontWeight: 600 }}>
+                  For more information, visit:
+                </strong>{" "}
+                <a
+                  href={
+                    dataMart && countryData.data[countryCode].advisory.source
+                  }
+                  target="_blank"
+                >
+                  {dataMart && countryData.data[countryCode].advisory.source}
+                </a>
+              </p>
+            </div>
           </div>
         </div>
 
@@ -284,7 +299,9 @@ const SearchResults = () => {
                 border: "1px solid #ccc",
                 padding: "10px",
                 marginBottom: "10px",
+                cursor: "pointer",
               }}
+              onClick={() => toggleFlightInfo(index)}
             >
               <div
                 style={{
@@ -293,31 +310,39 @@ const SearchResults = () => {
                   alignItems: "center",
                 }}
               >
-                <span>
+                <span style={{ flex: "1" }}>
                   {flight.tickets.departure_ticket.length > 1
-                    ? `From:${extractDateTime(
+                    ? `From: ${extractDateTime(
                         flight.tickets.departure_ticket[0].departure.time
-                      )}, To:${extractDateTime(
+                      )} To: ${extractDateTime(
                         flight.tickets.departure_ticket[
                           flight.tickets.departure_ticket.length - 1
                         ].arrival.time
                       )}`
-                    : `From:${extractDateTime(
+                    : `From: ${extractDateTime(
                         flight.tickets.departure_ticket[0].departure.time
-                      )}, To:${extractDateTime(
+                      )} To: ${extractDateTime(
                         flight.tickets.departure_ticket[0].arrival.time
                       )}`}
-                  <span>Duration: {flight.total_departure_duration}</span>{" "}
-                  <span>
-                    Total emission: {calculateTotalEmissions(flight)} kg
-                  </span>
-                  <span> Layover: {calculateLayoverTime(flight)}</span>{" "}
-                  {/* Add layover time display */}
                 </span>
-                <button onClick={() => toggleFlightInfo(index)}>
-                  {expandedFlightIndex === index
-                    ? "Hide ticket info"
-                    : "View ticket info"}
+                <span style={{ flex: "1" }}>
+                  Departure Duration: {flight.total_departure_duration}
+                </span>
+                <span style={{ flex: "1" }}>
+                  Total emission: {calculateTotalEmissions(flight)} kg
+                </span>
+                <span style={{ flex: "1" }}>
+                  Layover time: {calculateLayoverTime(flight)}
+                </span>
+                <button
+                  style={{
+                    border: "none",
+                    background: "none",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                  }}
+                >
+                  {expandedFlightIndex === index ? "▲" : "▼"}
                 </button>
               </div>
 
@@ -332,13 +357,12 @@ const SearchResults = () => {
                   }}
                 >
                   <h3>Flight {i + 1}</h3>
-                  <p>Departure: {ticket.departure.iataCode}</p>
+                  <p>Departure airport: {ticket.departure.iataCode}</p>
                   <p>
                     Departure time: {extractDateTime(ticket.departure.time)}
                   </p>
-                  <p>Arrival: {ticket.arrival.iataCode}</p>
+                  <p>Arrival airport: {ticket.arrival.iataCode}</p>
                   <p>Arrival time: {extractDateTime(ticket.arrival.time)}</p>
-                  <p>Carrier: {ticket.flight.carrierCode}</p>
                   <p>Flight number: {ticket.flight_number}</p>
                   <p>Duration: {ticket.duration}</p>
                   <p>Cabin: {ticket.cabin}</p>
@@ -351,10 +375,10 @@ const SearchResults = () => {
                     </p>
                   )}
                   <p>
-                    Layover info:{" "}
+                    Number of stops:{" "}
                     {i === flight.tickets.departure_ticket.length - 1
-                      ? "Non stop"
-                      : `${i + 1}stop`}
+                      ? "Non-stop"
+                      : `${i + 1}`}
                   </p>
                 </div>
               ))}
@@ -381,16 +405,15 @@ const SearchResults = () => {
                         }}
                       >
                         <h3>Flight {i + 1}</h3>
-                        <p>Departure: {ticket.departure.iataCode}</p>
+                        <p>Departure airport: {ticket.departure.iataCode}</p>
                         <p>
                           Departure time:{" "}
                           {extractDateTime(ticket.departure.time)}
                         </p>
-                        <p>Arrival: {ticket.arrival.iataCode}</p>
+                        <p>Arrival airport: {ticket.arrival.iataCode}</p>
                         <p>
                           Arrival time: {extractDateTime(ticket.arrival.time)}
                         </p>
-                        <p>Carrier: {ticket.flight.carrierCode}</p>
                         <p>Flight number: {ticket.flight_number}</p>
                         <p>Duration: {ticket.duration}</p>
                         <p>Cabin: {ticket.cabin}</p>
@@ -404,10 +427,10 @@ const SearchResults = () => {
                           </p>
                         )}
                         <p>
-                          Layover info:{" "}
+                          Number of stops:{" "}
                           {i === flight.tickets.return_ticket.length - 1
-                            ? "Non stop"
-                            : `${i + 1}stop`}
+                            ? "Non-stop"
+                            : `${i + 1}`}
                         </p>
                       </div>
                     ))}
