@@ -22,16 +22,25 @@ const SearchResults = () => {
   const [selectedStopovers, setSelectedStopovers] = useState("");
   const [selectedEmissions, setSelectedEmissions] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
+  const [tempF, setTempF] = useState(true);
 
   useEffect(() => {
-    var tempF = true;
-    if(tempF){
+    console.log(tempF);
+    // if(tempF){
         dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
-    }else{
-        dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
-    }
+    // }else{
+    //     dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
+    // }
 }, [dispatch]);
 
+  const changeScale =()=>{
+    if(tempF){
+      dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
+      setTempF(!tempF);
+    }else{
+      dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
+  }
+  }
   // Check if data exists and if it is an array
   if (!data || !Array.isArray(data)) {
     return <p>No data</p>;
@@ -303,6 +312,9 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
+        <button onClick={changeScale}>
+          Change Temperature Scale
+        </button>
         <DisplayTemp/>
         <DisplayWeather/>
         <div>
