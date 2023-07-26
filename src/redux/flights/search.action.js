@@ -70,7 +70,7 @@ export const displayUserFlight = (userID) =>{
   return async(dispatch)=>{
     try{
       const result = await axios.get(`http://localhost:8080/api/flights?id=${userID}`);
-      dispatch({type:DISPLAY_USER_FLIGHTS, payload:result});
+      dispatch({type:DISPLAY_USER_FLIGHTS, payload:result.data});
     }
     catch(err){
       console.log(err);
