@@ -68,7 +68,7 @@ const SearchBar = (props) => {
       props.flights.travelAdvisoryData
     ) {
       console.log("Directed successfully to search result page");
-      navigate("/SearchResults", { state: { data: props.flights } });
+      navigate("/SearchResults", { state: { data: props.flights, targetLocation: toValue} });
     } else {
       console.log("Directed unsuccessfully");
     }

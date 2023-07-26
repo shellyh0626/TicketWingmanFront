@@ -70,19 +70,6 @@ function App() {
                   Emission Calculator
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  to="/weather"
-                  state={{
-                    destination: "JFK",
-                    startingDate: "2023-09-01",
-                    endingDate: "2023-12-30",
-                    tempF: true,
-                  }}
-                >
-                  weather
-                </Link>
-              </li>
             </>
           )}
           {isLoggedIn && (
