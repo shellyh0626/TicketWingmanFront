@@ -3,6 +3,8 @@ import {
   UPDATE_SEARCH_DATA,
   SEARCH_FLIGHTS_SUCCESS,
   SEARCH_FLIGHTS_FAILURE,
+  DISPLAY_USER_FLIGHTS,
+  INSERT_USER_FLIGHTS,
 } from "./search.types";
 
 export const updateSearchData = (
@@ -63,3 +65,26 @@ export const searchFlights = (requestData) => async (dispatch) => {
     dispatch({ type: SEARCH_FLIGHTS_FAILURE, payload: error.message });
   }
 };
+
+export const displayUserFlight = (userID) =>{
+  return async(dispatch)=>{
+    try{
+      const result = await axios.get(`http://localhost:8080/api/flights?id=${userID}`);
+      dispatch({type:DISPLAY_USER_FLIGHTS, payload:result});
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+}
+
+export const insertUserFlight = (userEmail,carrierCode,flightNumber,scheduledDepartureDate) => {
+  return async(dispatch) => {
+    try{
+      const result = await axios.post("http://localhost:8080/api/flights/newflight",{userEmail,carrierCode,flightNumber,scheduledDepartureDate});
+      dispatch({type:INSERT_USER_FLIGHTS, payload:result});
+    }catch(err){
+      console.log(err);
+    }
+  }
+}
