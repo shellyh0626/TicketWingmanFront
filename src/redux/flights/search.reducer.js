@@ -2,6 +2,8 @@ import {
   UPDATE_SEARCH_DATA,
   SEARCH_FLIGHTS_SUCCESS,
   SEARCH_FLIGHTS_FAILURE,
+  DISPLAY_USER_FLIGHTS,
+  INSERT_USER_FLIGHTS,
 } from "./search.types";
 
 const initialState = {
@@ -11,6 +13,8 @@ const initialState = {
   returnValue: "",
   flights: [], // Store search results
   error: null,
+  userFlights:[],
+  insertedFlight:[],
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -35,6 +39,16 @@ const searchReducer = (state = initialState, action) => {
         flights: [],
         error: action.payload,
       };
+    case DISPLAY_USER_FLIGHTS:
+      return {
+        ...state,
+        userFlights: action.payload
+      }
+    case INSERT_USER_FLIGHTS:
+      return {
+        ...state,
+        insertedFlight: action.payload
+      }
     default:
       return state;
   }
