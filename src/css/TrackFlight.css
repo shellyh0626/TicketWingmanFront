@@ -22,3 +22,12 @@
   text-align: center;
   margin-bottom: 10px;
 }
+
+#flightDataContainer {
+  border: solid;
+  display: flex;
+  text-align: center;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 20px;
+}

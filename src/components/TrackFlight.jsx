@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_FLIGHT_THUNK } from "../redux/track/track.actions";
 import "../css/TrackFlight.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlane } from "@fortawesome/free-solid-svg-icons";
 
 function TrackFlight() {
   const flight = useSelector((state) => state.track.flightData);
   const dispatch = useDispatch();
   const [flightNumber, setFlightNumber] = useState();
-
-  useEffect(() => {
-    if (flightNumber) {
-      const flightObject = {
-        flight_iata: flightNumber,
-      };
-      console.log("dispatch: track flight");
-      dispatch(FETCH_FLIGHT_THUNK(flightObject));
-    }
-  }, [flightNumber, dispatch]);
 
   const handleChange = (evt) => {
     setFlightNumber(evt.target.value);
@@ -29,11 +21,28 @@ function TrackFlight() {
       const flightObject = {
         flight_iata: flightNumber,
       };
-      console.log(flightObject);
       dispatch(FETCH_FLIGHT_THUNK(flightObject));
-      console.log(flight);
-      console.log(flight.data[0].departure.gate);
     }
+  };
+
+  const trackFlightCard = () => {
+    const flights = flight.data[0];
+    return (
+      <div id="flightDataContainer">
+        <div id="flightDataHeading">
+          <h1>{flights.flight.iata}</h1>
+          <p>
+            {flights.airline.name} ({flights.airline.iata})
+          </p>
+          <h1>{flights.departure.iata}</h1>
+          <p>{flights.departure.airport}</p>
+          <FontAwesomeIcon icon={faPlane} size="5x" />
+          <h1>{flights.arrival.iata}</h1>
+          <p>{flights.arrival.airport}</p>
+          <h1>{flights.flight_status}</h1>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -65,11 +74,7 @@ function TrackFlight() {
           SEARCH FLIGHT
         </button>
       </div>
-      {flight ? (
-        <h1>Flight {flight.data[0].departure.gate}</h1>
-      ) : (
-        <h1>No Flight</h1>
-      )}
+      {flight ? trackFlightCard() : <h1>No Flight</h1>}
     </div>
   );
 }
