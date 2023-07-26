@@ -23,11 +23,9 @@
   margin-bottom: 10px;
 }
 
-#flightDataContainer {
-  border: solid;
+#searchButtonTrack {
   display: flex;
-  text-align: center;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
