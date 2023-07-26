@@ -17,6 +17,7 @@ const SearchResults = () => {
   console.log("Flight's data" + JSON.stringify(data));
   const [expandedFlightIndex, setExpandedFlightIndex] = useState(-1);
 
+  // const [expandedFlightIndex, setExpandedFlightIndex] = use
   const [selectedCabin, setSelectedCabin] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedStopovers, setSelectedStopovers] = useState("");
@@ -41,6 +42,7 @@ const SearchResults = () => {
       dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
   }
   }
+
   // Check if data exists and if it is an array
   if (!data || !Array.isArray(data)) {
     return <p>No data</p>;
