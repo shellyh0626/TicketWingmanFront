@@ -32,6 +32,7 @@ function TrackFlight() {
       console.log(flightObject);
       dispatch(FETCH_FLIGHT_THUNK(flightObject));
       console.log(flight);
+      console.log(flight.data[0].departure.gate);
     }
   };
 
@@ -64,6 +65,11 @@ function TrackFlight() {
           SEARCH FLIGHT
         </button>
       </div>
+      {flight ? (
+        <h1>Flight {flight.data[0].departure.gate}</h1>
+      ) : (
+        <h1>No Flight</h1>
+      )}
     </div>
   );
 }
