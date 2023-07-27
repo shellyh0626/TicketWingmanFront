@@ -16,6 +16,7 @@ import Emission from "./pages/Emission";
 import { me } from "./redux/users/user.actions";
 import { logout } from "./redux/users/user.actions";
 import Weather from "./pages/Weather";
+import Track from "./pages/Track";
 import UserFlights from "./pages/UserFlights";
 import InsertFlight from "./pages/InsertFlight";
 
@@ -70,6 +71,24 @@ function App() {
                   Emission Calculator
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link
+                  to="/weather"
+                  state={{
+                    destination: "JFK",
+                    startingDate: "2023-09-01",
+                    endingDate: "2023-12-30",
+                    tempF: true,
+                  }}
+                >
+                  weather
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/track" className="nav-link mx-2">
+                  Track
+                </Link>
+              </li>
             </>
           )}
           {isLoggedIn && (
@@ -111,6 +130,7 @@ function App() {
         <Route path="/searchResults" element={<SearchResults />} />
         <Route path="/weather" element={<Weather />} />
         <Route path="/emission" element={<Emission />} />
+        <Route path="/track" element={<Track />} />
         <Route path="/newFlights" element={<InsertFlight />} />
       </Routes>
     </div>

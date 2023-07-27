@@ -20,6 +20,7 @@ const SearchResults = () => {
   console.log("Flight's data" + JSON.stringify(data));
   const [expandedFlightIndex, setExpandedFlightIndex] = useState(-1);
 
+  // const [expandedFlightIndex, setExpandedFlightIndex] = use
   const [selectedCabin, setSelectedCabin] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedStopovers, setSelectedStopovers] = useState("");
