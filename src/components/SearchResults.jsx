@@ -7,6 +7,8 @@ import {
 } from "../redux/weather/weather.actions";
 import DisplayTemp from "./DisplayTemp";
 import DisplayWeather from "./DisplayWeather";
+import EmissionCalculator from "./EmissionCalculator";
+import "../css/SearchResults.css";
 
 const SearchResults = () => {
   // console.log("Render Search Results page");
@@ -20,7 +22,6 @@ const SearchResults = () => {
   console.log("Flight's data" + JSON.stringify(data));
   const [expandedFlightIndex, setExpandedFlightIndex] = useState(-1);
 
-  // const [expandedFlightIndex, setExpandedFlightIndex] = use
   const [selectedCabin, setSelectedCabin] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedStopovers, setSelectedStopovers] = useState("");
@@ -36,10 +37,10 @@ const SearchResults = () => {
   const changeScale = () => {
     if (tempF) {
       dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
-      setTempF(!tempF);
+      setTempF(false);
     } else {
       dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
-      setTempF(!tempF);
+      setTempF(true);
     }
   };
   // Check if data exists and if it is an array
@@ -194,10 +195,8 @@ const SearchResults = () => {
 
   return (
     <div>
-      <div
-        style={{ textAlign: "center", marginBottom: "20px", padding: "20px" }}
-      >
-        <div style={{ display: "inline-block", marginRight: "20px" }}>
+      <div className="dropdown-menu-container">
+        <div className="select-container">
           <select
             id="cabinSelect"
             value={selectedCabin}
@@ -210,7 +209,7 @@ const SearchResults = () => {
             <option value="FIRST">First</option>
           </select>
         </div>
-        <div style={{ display: "inline-block", marginRight: "20px" }}>
+        <div className="select-container">
           <select
             id="stopoversSelect"
             value={selectedStopovers}
@@ -222,7 +221,7 @@ const SearchResults = () => {
             <option value="2-stops">Two stop</option>
           </select>
         </div>
-        <div style={{ display: "inline-block", marginRight: "20px" }}>
+        <div className="select-container">
           <select
             id="emissionsSelect"
             value={selectedEmissions}
@@ -235,20 +234,20 @@ const SearchResults = () => {
             <option value="1000">1000kg and below</option>
           </select>
         </div>
-        <div style={{ display: "inline-block", marginRight: "20px" }}>
+        <div className="select-container">
           <select
             id="durationSelect"
             value={selectedDuration}
             onChange={(e) => setSelectedDuration(e.target.value)}
           >
-            <option value="">Total departure duration</option>
+            <option value="">Departure duration</option>
             <option value="2">2hr and below</option>
             <option value="4">4hr and below</option>
             <option value="6">6hr and below</option>
             <option value="8">8hr and below</option>
           </select>
         </div>
-        <div style={{ display: "inline-block", marginRight: "20px" }}>
+        <div className="select-container">
           <select
             id="priceSelect"
             value={selectedPrice}
@@ -265,42 +264,30 @@ const SearchResults = () => {
           </select>
         </div>
         <div>
-          <div
-            style={{
-              border: "1px solid #ccc",
-              padding: "10px",
-              marginTop: "10px",
-              marginBottom: "10px",
-            }}
-          >
+          <div className="advisory-container">
             <h3>
               Travel Advisory: {dataMart && countryData.data[countryCode].name}
             </h3>
             <div>
-              <p style={{ marginBottom: "2.5px" }}>
-                <strong style={{ fontWeight: 600 }}>Risk level:</strong>{" "}
+              <p>
+                <strong>Risk level:</strong>{" "}
                 {dataMart && countryData.data[countryCode].advisory.score}
               </p>
-              <p style={{ marginBottom: "2.5px" }}>
-                <strong style={{ fontWeight: 600 }}>
-                  Risk level description:
-                </strong>{" "}
+              <p>
+                <strong>Risk level description:</strong>{" "}
                 {dataMart && countryData.data[countryCode].advisory.message}
               </p>
-              <p style={{ marginBottom: "2.5px" }}>
-                <strong style={{ fontWeight: 600 }}>Advisories found:</strong>{" "}
+              <p>
+                <strong>Advisories found:</strong>{" "}
                 {dataMart &&
                   countryData.data[countryCode].advisory.sources_active}
               </p>
-              <p style={{ marginBottom: "2.5px" }}>
-                <strong style={{ fontWeight: 600 }}>Updated time:</strong>{" "}
+              <p>
+                <strong>Updated time:</strong>{" "}
                 {dataMart && countryData.data[countryCode].advisory.updated}
               </p>
-
-              <p style={{ marginBottom: "2.5px" }}>
-                <strong style={{ fontWeight: 600 }}>
-                  For more information, visit:
-                </strong>{" "}
+              <p>
+                <strong>For more information, visit:</strong>{" "}
                 <a
                   href={
                     dataMart && countryData.data[countryCode].advisory.source
@@ -313,162 +300,166 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
-        <button onClick={changeScale}>Change Temperature Scale</button>
-        <DisplayTemp />
-        <DisplayWeather />
-        <div>
-          {filteredData.map((flight, index) => (
-            <div
-              key={index}
-              style={{
-                border: "1px solid #ccc",
-                padding: "10px",
-                marginBottom: "10px",
-                cursor: "pointer",
-              }}
-              onClick={() => toggleFlightInfo(index)}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <span style={{ flex: "1" }}>
-                  {flight.tickets.departure_ticket.length > 1
-                    ? `From: ${extractDateTime(
-                        flight.tickets.departure_ticket[0].departure.time
-                      )} To: ${extractDateTime(
-                        flight.tickets.departure_ticket[
-                          flight.tickets.departure_ticket.length - 1
-                        ].arrival.time
-                      )}`
-                    : `From: ${extractDateTime(
-                        flight.tickets.departure_ticket[0].departure.time
-                      )} To: ${extractDateTime(
-                        flight.tickets.departure_ticket[0].arrival.time
-                      )}`}
-                </span>
-                <span style={{ flex: "1" }}>
-                  Departure Duration: {flight.total_departure_duration}
-                </span>
-                <span style={{ flex: "1" }}>
-                  Total emission: {calculateTotalEmissions(flight)} kg
-                </span>
-                <span style={{ flex: "1" }}>
-                  Layover time: {calculateLayoverTime(flight)}
-                </span>
-                <button
-                  style={{
-                    border: "none",
-                    background: "none",
-                    fontSize: "20px",
-                    cursor: "pointer",
-                  }}
-                >
-                  {expandedFlightIndex === index ? "▲" : "▼"}
-                </button>
-              </div>
 
-              {flight.tickets.departure_ticket.map((ticket, i) => (
+        <div>
+          <div className="temperature-display-container">
+            <div className="temperature-inner-container">
+              <button onClick={changeScale} className="temperature-button">
+                {tempF ? "Convert to Celsius" : "Convert to Fahrenheit"}
+              </button>
+              <DisplayTemp />
+              <br />
+              <DisplayWeather />
+            </div>
+          </div>
+        </div>
+        <br />
+
+        <div>
+          <div className="flight-search-container">
+            <div>
+              <div className="emission-calculator-container">
+                <h5>Emission Calculator</h5>
+                <EmissionCalculator />
+              </div>
+            </div>
+            <div className="flight-data-container">
+              <h5>Flights Tickets</h5>
+              {filteredData.map((flight, index) => (
                 <div
-                  key={i}
-                  style={{
-                    display: expandedFlightIndex === index ? "block" : "none",
-                    border: "1px solid #ccc",
-                    padding: "10px",
-                    marginBottom: "10px",
-                  }}
+                  key={index}
+                  className="flight-container"
+                  onClick={() => toggleFlightInfo(index)}
                 >
-                  <h3>Flight {i + 1}</h3>
-                  <p>Departure airport: {ticket.departure.iataCode}</p>
-                  <p>
-                    Departure time: {extractDateTime(ticket.departure.time)}
-                  </p>
-                  <p>Arrival airport: {ticket.arrival.iataCode}</p>
-                  <p>Arrival time: {extractDateTime(ticket.arrival.time)}</p>
-                  <p>Flight number: {ticket.flight_number}</p>
-                  <p>Duration: {ticket.duration}</p>
-                  <p>Cabin: {ticket.cabin}</p>
-                  {parseFloat(ticket.emissions) === -1 ? (
-                    <p>Emission: unknown</p>
-                  ) : (
+                  <div className="flight-details">
+                    <div className="from-to-container">
+                      <span className="from-to">
+                        {flight.tickets.departure_ticket.length > 1
+                          ? `From: ${extractDateTime(
+                              flight.tickets.departure_ticket[0].departure.time
+                            )}`
+                          : `From: ${extractDateTime(
+                              flight.tickets.departure_ticket[0].departure.time
+                            )}`}
+                      </span>
+                      <span className="from-to">
+                        {flight.tickets.departure_ticket.length > 1
+                          ? `To: ${extractDateTime(
+                              flight.tickets.departure_ticket[
+                                flight.tickets.departure_ticket.length - 1
+                              ].arrival.time
+                            )}`
+                          : `To: ${extractDateTime(
+                              flight.tickets.departure_ticket[0].arrival.time
+                            )}`}
+                      </span>
+                    </div>
+                    <span>
+                      Departure Duration: {flight.total_departure_duration}
+                    </span>
+                    <span>Emission: {calculateTotalEmissions(flight)} kg</span>
+                    <span>Layover: {calculateLayoverTime(flight)}</span>
+                    <span>
+                      Price: {flight.total_price.total}{" "}
+                      {flight.total_price.currency}
+                    </span>
+                    <button className="flight-button">
+                      {expandedFlightIndex === index ? "▲" : "▼"}
+                    </button>
+                  </div>
+
+                  {flight.tickets.departure_ticket.map((ticket, i) => (
+                    <div
+                      key={i}
+                      className={`departure-ticket-container ${
+                        expandedFlightIndex === index ? "show" : ""
+                      }`}
+                    >
+                      <h3>Flight {i + 1}</h3>
+                      <p>Departure airport: {ticket.departure.iataCode}</p>
+                      <p>
+                        Departure time: {extractDateTime(ticket.departure.time)}
+                      </p>
+                      <p>Arrival airport: {ticket.arrival.iataCode}</p>
+                      <p>
+                        Arrival time: {extractDateTime(ticket.arrival.time)}
+                      </p>
+                      <p>Flight number: {ticket.flight_number}</p>
+                      <p>Duration: {ticket.duration}</p>
+                      <p>Cabin: {ticket.cabin}</p>
+                      {parseFloat(ticket.emissions) === -1 ? (
+                        <p>Emission: unknown</p>
+                      ) : (
+                        <p>
+                          Carbon dioxide emission:{" "}
+                          {(parseFloat(ticket.emissions) / 1000).toFixed(2)} kg
+                        </p>
+                      )}
+                      <p>
+                        Number of stops:{" "}
+                        {i === flight.tickets.departure_ticket.length - 1
+                          ? "Non-stop"
+                          : `${i + 1}`}
+                      </p>
+                    </div>
+                  ))}
+
+                  {/* Add divider: To display return ticker info */}
+                  {expandedFlightIndex === index &&
+                    flight.tickets.return_ticket &&
+                    flight.tickets.return_ticket.length > 0 && (
+                      <div className="return-ticket-divider">
+                        <h3>Return flight info</h3>
+                        {flight.tickets.return_ticket.map((ticket, i) => (
+                          <div key={i} className="return-ticket-container">
+                            <h3>Flight {i + 1}</h3>
+                            <p>
+                              Departure airport: {ticket.departure.iataCode}
+                            </p>
+                            <p>
+                              Departure time:{" "}
+                              {extractDateTime(ticket.departure.time)}
+                            </p>
+                            <p>Arrival airport: {ticket.arrival.iataCode}</p>
+                            <p>
+                              Arrival time:{" "}
+                              {extractDateTime(ticket.arrival.time)}
+                            </p>
+                            <p>Flight number: {ticket.flight_number}</p>
+                            <p>Duration: {ticket.duration}</p>
+                            <p>Cabin: {ticket.cabin}</p>
+                            {parseFloat(ticket.emissions) === -1 ? (
+                              <p>Emission: unknown</p>
+                            ) : (
+                              <p>
+                                Carbon dioxide emission:{" "}
+                                {(parseFloat(ticket.emissions) / 1000).toFixed(
+                                  2
+                                )}{" "}
+                                kg
+                              </p>
+                            )}
+                            <p>
+                              Number of stops:{" "}
+                              {i === flight.tickets.return_ticket.length - 1
+                                ? "Non-stop"
+                                : `${i + 1}`}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                  {expandedFlightIndex === index && flight.total_price && (
                     <p>
-                      Carbon dioxide emission:{" "}
-                      {(parseFloat(ticket.emissions) / 1000).toFixed(2)} kg
+                      Price:{flight.total_price.total}{" "}
+                      {flight.total_price.currency}
                     </p>
                   )}
-                  <p>
-                    Number of stops:{" "}
-                    {i === flight.tickets.departure_ticket.length - 1
-                      ? "Non-stop"
-                      : `${i + 1}`}
-                  </p>
                 </div>
               ))}
-
-              {/* Add divider: To display return ticker info */}
-              {expandedFlightIndex === index &&
-                flight.tickets.return_ticket &&
-                flight.tickets.return_ticket.length > 0 && (
-                  <div
-                    style={{
-                      borderTop: "1px solid #ccc",
-                      marginTop: "10px",
-                      paddingTop: "10px",
-                    }}
-                  >
-                    <h3>Return flight info</h3>
-                    {flight.tickets.return_ticket.map((ticket, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          border: "1px solid #ccc",
-                          padding: "10px",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        <h3>Flight {i + 1}</h3>
-                        <p>Departure airport: {ticket.departure.iataCode}</p>
-                        <p>
-                          Departure time:{" "}
-                          {extractDateTime(ticket.departure.time)}
-                        </p>
-                        <p>Arrival airport: {ticket.arrival.iataCode}</p>
-                        <p>
-                          Arrival time: {extractDateTime(ticket.arrival.time)}
-                        </p>
-                        <p>Flight number: {ticket.flight_number}</p>
-                        <p>Duration: {ticket.duration}</p>
-                        <p>Cabin: {ticket.cabin}</p>
-                        {parseFloat(ticket.emissions) === -1 ? (
-                          <p>Emission: unknown</p>
-                        ) : (
-                          <p>
-                            Carbon dioxide emission:{" "}
-                            {(parseFloat(ticket.emissions) / 1000).toFixed(2)}{" "}
-                            kg
-                          </p>
-                        )}
-                        <p>
-                          Number of stops:{" "}
-                          {i === flight.tickets.return_ticket.length - 1
-                            ? "Non-stop"
-                            : `${i + 1}`}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-              {expandedFlightIndex === index && flight.total_price && (
-                <p>
-                  Price:{flight.total_price.total} {flight.total_price.currency}
-                </p>
-              )}
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>

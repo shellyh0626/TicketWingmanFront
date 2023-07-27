@@ -1,0 +1,116 @@
+.dropdown-menu-container {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.select-container {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.advisory-container {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.advisory-container p {
+  margin-bottom: 2.5px;
+}
+
+.advisory-container strong {
+  font-weight: 600;
+}
+
+.temperature-display-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.temperature-inner-container {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.temperature-button {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.flight-search-container {
+  display: flex;
+  gap: 20px;
+}
+
+.emission-calculator-container {
+  position: sticky;
+  top: 100px;
+  z-index: 1;
+  flex: 1;
+  padding: 1px;
+}
+
+.flight-data-container {
+  flex: 3;
+  padding: 10px;
+}
+
+.flight-container {
+  border: 1.25px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.flight-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.flight-details span {
+  flex: 1;
+}
+
+.from-to-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.from-to {
+  margin-bottom: 3px;
+}
+
+.flight-button {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.departure-ticket-container {
+  display: none;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.departure-ticket-container.show {
+  display: block;
+}
+
+.return-ticket-divider {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.return-ticket-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
