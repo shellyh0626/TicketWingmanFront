@@ -19,6 +19,7 @@ import Weather from "./pages/Weather";
 import Track from "./pages/Track";
 import UserFlights from "./pages/UserFlights";
 import InsertFlight from "./pages/InsertFlight";
+import "./css/Navbar.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function App() {
   return (
     <div className="App">
       {/* Navigation */}
-      <nav className="navbar navbar-expand-lg navbar-dark p-3 bg-danger">
+      <nav className="navbar navbar-expand-lg navbar-dark p-3">
         <ul className="navbar-nav mx-auto">
           {isLoggedIn ? (
             <li className="nav-item">
@@ -64,24 +65,6 @@ function App() {
               <li className="nav-item">
                 <Link to="/signup" className="nav-link mx-2">
                   Sign up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/emission" className="nav-link mx-2">
-                  Emission Calculator
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/weather"
-                  state={{
-                    destination: "JFK",
-                    startingDate: "2023-09-01",
-                    endingDate: "2023-12-30",
-                    tempF: true,
-                  }}
-                >
-                  weather
                 </Link>
               </li>
               <li className="nav-item">
