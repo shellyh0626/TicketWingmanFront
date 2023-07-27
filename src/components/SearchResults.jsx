@@ -263,6 +263,7 @@ const SearchResults = () => {
             <option value="1500-above">1500 and above</option>
           </select>
         </div>
+
         <div>
           <div className="advisory-container">
             <h3>
@@ -315,150 +316,144 @@ const SearchResults = () => {
         </div>
         <br />
 
-        <div>
-          <div className="flight-search-container">
-            <div>
-              <div className="emission-calculator-container">
-                <h5>Emission Calculator</h5>
-                <EmissionCalculator />
-              </div>
-            </div>
-            <div className="flight-data-container">
-              <h5>Flights Tickets</h5>
-              {filteredData.map((flight, index) => (
-                <div
-                  key={index}
-                  className="flight-container"
-                  onClick={() => toggleFlightInfo(index)}
-                >
-                  <div className="flight-details">
-                    <div className="from-to-container">
-                      <span className="from-to">
-                        {flight.tickets.departure_ticket.length > 1
-                          ? `From: ${extractDateTime(
-                              flight.tickets.departure_ticket[0].departure.time
-                            )}`
-                          : `From: ${extractDateTime(
-                              flight.tickets.departure_ticket[0].departure.time
-                            )}`}
-                      </span>
-                      <span className="from-to">
-                        {flight.tickets.departure_ticket.length > 1
-                          ? `To: ${extractDateTime(
-                              flight.tickets.departure_ticket[
-                                flight.tickets.departure_ticket.length - 1
-                              ].arrival.time
-                            )}`
-                          : `To: ${extractDateTime(
-                              flight.tickets.departure_ticket[0].arrival.time
-                            )}`}
-                      </span>
-                    </div>
-                    <span>
-                      Departure Duration: {flight.total_departure_duration}
+        {/* This div group emission calculator and all the flight tickets together */}
+        <div className="calculator-flights-container">
+          {/* Emission calculator */}
+          <div className="emission-calculator-container">
+            <h5>Emission Calculator</h5>
+            <EmissionCalculator />
+          </div>
+
+          {/* All flight tickets */}
+          <div className="flight-tickets-container">
+            <h5>Flights Tickets</h5>
+            {filteredData.map((flight, index) => (
+              <div
+                key={index}
+                className="flight-ticket"
+                onClick={() => toggleFlightInfo(index)}
+              >
+                <div className="flight-ticket-info">
+                  <div className="from-to-container">
+                    <span className="from-to">
+                      {flight.tickets.departure_ticket.length > 1
+                        ? `From: ${extractDateTime(
+                            flight.tickets.departure_ticket[0].departure.time
+                          )}`
+                        : `From: ${extractDateTime(
+                            flight.tickets.departure_ticket[0].departure.time
+                          )}`}
                     </span>
-                    <span>Emission: {calculateTotalEmissions(flight)} kg</span>
-                    <span>Layover: {calculateLayoverTime(flight)}</span>
-                    <span>
-                      Price: {flight.total_price.total}{" "}
-                      {flight.total_price.currency}
+                    <span className="from-to">
+                      {flight.tickets.departure_ticket.length > 1
+                        ? `To: ${extractDateTime(
+                            flight.tickets.departure_ticket[
+                              flight.tickets.departure_ticket.length - 1
+                            ].arrival.time
+                          )}`
+                        : `To: ${extractDateTime(
+                            flight.tickets.departure_ticket[0].arrival.time
+                          )}`}
                     </span>
-                    <button className="flight-button">
-                      {expandedFlightIndex === index ? "▲" : "▼"}
-                    </button>
                   </div>
-
-                  {flight.tickets.departure_ticket.map((ticket, i) => (
-                    <div
-                      key={i}
-                      className={`departure-ticket-container ${
-                        expandedFlightIndex === index ? "show" : ""
-                      }`}
-                    >
-                      <h3>Flight {i + 1}</h3>
-                      <p>Departure airport: {ticket.departure.iataCode}</p>
-                      <p>
-                        Departure time: {extractDateTime(ticket.departure.time)}
-                      </p>
-                      <p>Arrival airport: {ticket.arrival.iataCode}</p>
-                      <p>
-                        Arrival time: {extractDateTime(ticket.arrival.time)}
-                      </p>
-                      <p>Flight number: {ticket.flight_number}</p>
-                      <p>Duration: {ticket.duration}</p>
-                      <p>Cabin: {ticket.cabin}</p>
-                      {parseFloat(ticket.emissions) === -1 ? (
-                        <p>Emission: unknown</p>
-                      ) : (
-                        <p>
-                          Carbon dioxide emission:{" "}
-                          {(parseFloat(ticket.emissions) / 1000).toFixed(2)} kg
-                        </p>
-                      )}
-                      <p>
-                        Number of stops:{" "}
-                        {i === flight.tickets.departure_ticket.length - 1
-                          ? "Non-stop"
-                          : `${i + 1}`}
-                      </p>
-                    </div>
-                  ))}
-
-                  {/* Add divider: To display return ticker info */}
-                  {expandedFlightIndex === index &&
-                    flight.tickets.return_ticket &&
-                    flight.tickets.return_ticket.length > 0 && (
-                      <div className="return-ticket-divider">
-                        <h3>Return flight info</h3>
-                        {flight.tickets.return_ticket.map((ticket, i) => (
-                          <div key={i} className="return-ticket-container">
-                            <h3>Flight {i + 1}</h3>
-                            <p>
-                              Departure airport: {ticket.departure.iataCode}
-                            </p>
-                            <p>
-                              Departure time:{" "}
-                              {extractDateTime(ticket.departure.time)}
-                            </p>
-                            <p>Arrival airport: {ticket.arrival.iataCode}</p>
-                            <p>
-                              Arrival time:{" "}
-                              {extractDateTime(ticket.arrival.time)}
-                            </p>
-                            <p>Flight number: {ticket.flight_number}</p>
-                            <p>Duration: {ticket.duration}</p>
-                            <p>Cabin: {ticket.cabin}</p>
-                            {parseFloat(ticket.emissions) === -1 ? (
-                              <p>Emission: unknown</p>
-                            ) : (
-                              <p>
-                                Carbon dioxide emission:{" "}
-                                {(parseFloat(ticket.emissions) / 1000).toFixed(
-                                  2
-                                )}{" "}
-                                kg
-                              </p>
-                            )}
-                            <p>
-                              Number of stops:{" "}
-                              {i === flight.tickets.return_ticket.length - 1
-                                ? "Non-stop"
-                                : `${i + 1}`}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-
-                  {expandedFlightIndex === index && flight.total_price && (
-                    <p>
-                      Price:{flight.total_price.total}{" "}
-                      {flight.total_price.currency}
-                    </p>
-                  )}
+                  <span>
+                    Departure Duration: {flight.total_departure_duration}
+                  </span>
+                  <span>Emission: {calculateTotalEmissions(flight)} kg</span>
+                  <span>Layover: {calculateLayoverTime(flight)}</span>
+                  <span>
+                    Price: {flight.total_price.total}{" "}
+                    {flight.total_price.currency}
+                  </span>
+                  <button className="flight-ticket-button">
+                    {expandedFlightIndex === index ? "▲" : "▼"}
+                  </button>
                 </div>
-              ))}
-            </div>
+
+                {/* Display departure ticket info */}
+                {flight.tickets.departure_ticket.map((ticket, i) => (
+                  <div
+                    key={i}
+                    className={`departure-ticket-container ${
+                      expandedFlightIndex === index ? "show" : ""
+                    }`}
+                  >
+                    <h3>Flight {i + 1}</h3>
+                    <p>Departure airport: {ticket.departure.iataCode}</p>
+                    <p>
+                      Departure time: {extractDateTime(ticket.departure.time)}
+                    </p>
+                    <p>Arrival airport: {ticket.arrival.iataCode}</p>
+                    <p>Arrival time: {extractDateTime(ticket.arrival.time)}</p>
+                    <p>Flight number: {ticket.flight_number}</p>
+                    <p>Duration: {ticket.duration}</p>
+                    <p>Cabin: {ticket.cabin}</p>
+                    {parseFloat(ticket.emissions) === -1 ? (
+                      <p>Emission: unknown</p>
+                    ) : (
+                      <p>
+                        Carbon dioxide emission:{" "}
+                        {(parseFloat(ticket.emissions) / 1000).toFixed(2)} kg
+                      </p>
+                    )}
+                    <p>
+                      Number of stops:{" "}
+                      {i === flight.tickets.departure_ticket.length - 1
+                        ? "Non-stop"
+                        : `${i + 1}`}
+                    </p>
+                  </div>
+                ))}
+
+                {/* Add divider: Display return ticket info */}
+                {expandedFlightIndex === index &&
+                  flight.tickets.return_ticket &&
+                  flight.tickets.return_ticket.length > 0 && (
+                    <div className="return-ticket-divider">
+                      <h3>Return flight info</h3>
+                      {flight.tickets.return_ticket.map((ticket, i) => (
+                        <div key={i} className="return-ticket-container">
+                          <h3>Flight {i + 1}</h3>
+                          <p>Departure airport: {ticket.departure.iataCode}</p>
+                          <p>
+                            Departure time:{" "}
+                            {extractDateTime(ticket.departure.time)}
+                          </p>
+                          <p>Arrival airport: {ticket.arrival.iataCode}</p>
+                          <p>
+                            Arrival time: {extractDateTime(ticket.arrival.time)}
+                          </p>
+                          <p>Flight number: {ticket.flight_number}</p>
+                          <p>Duration: {ticket.duration}</p>
+                          <p>Cabin: {ticket.cabin}</p>
+                          {parseFloat(ticket.emissions) === -1 ? (
+                            <p>Emission: unknown</p>
+                          ) : (
+                            <p>
+                              Carbon dioxide emission:{" "}
+                              {(parseFloat(ticket.emissions) / 1000).toFixed(2)}{" "}
+                              kg
+                            </p>
+                          )}
+                          <p>
+                            Number of stops:{" "}
+                            {i === flight.tickets.return_ticket.length - 1
+                              ? "Non-stop"
+                              : `${i + 1}`}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                {expandedFlightIndex === index && flight.total_price && (
+                  <p>
+                    Price:{flight.total_price.total}{" "}
+                    {flight.total_price.currency}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
