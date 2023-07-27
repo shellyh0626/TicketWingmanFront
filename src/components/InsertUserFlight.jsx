@@ -44,8 +44,9 @@ function InsertUserFlight() {
             <Form.Control class='inputcontents' id='departureDate' type="text" placeholder="Departure Date of the flight" required />
           </InputGroup>
           <InputGroup className='mb-3'>
-            <InputGroup.Text>Campus : </InputGroup.Text>
+            <InputGroup.Text>Cabin : </InputGroup.Text>
             <Form.Select id="cabin" required>
+                <option>.....</option>
                 <option> ECONOMY </option>
                 <option> PREMIUM_ECONOMY </option>
                 <option> BUSINESS </option>
