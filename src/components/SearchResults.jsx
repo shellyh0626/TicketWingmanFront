@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { FETCH_WEATHER_F_THUNK, FETCH_WEATHER_C_THUNK } from "../redux/weather/weather.actions";
+import {
+  FETCH_WEATHER_F_THUNK,
+  FETCH_WEATHER_C_THUNK,
+} from "../redux/weather/weather.actions";
 import DisplayTemp from "./DisplayTemp";
 import DisplayWeather from "./DisplayWeather";
 
@@ -26,21 +29,18 @@ const SearchResults = () => {
 
   useEffect(() => {
     console.log(tempF);
-    // if(tempF){
-        dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
-    // }else{
-    //     dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
-    // }
-}, [dispatch]);
+    dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
+  }, [dispatch]);
 
-  const changeScale =()=>{
-    if(tempF){
+  const changeScale = () => {
+    if (tempF) {
       dispatch(FETCH_WEATHER_C_THUNK(location.state.targetLocation));
       setTempF(!tempF);
-    }else{
+    } else {
       dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
-  }
-  }
+      setTempF(!tempF);
+    }
+  };
   // Check if data exists and if it is an array
   if (!data || !Array.isArray(data)) {
     return <p>No data</p>;
@@ -312,11 +312,9 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
-        <button onClick={changeScale}>
-          Change Temperature Scale
-        </button>
-        <DisplayTemp/>
-        <DisplayWeather/>
+        <button onClick={changeScale}>Change Temperature Scale</button>
+        <DisplayTemp />
+        <DisplayWeather />
         <div>
           {filteredData.map((flight, index) => (
             <div
