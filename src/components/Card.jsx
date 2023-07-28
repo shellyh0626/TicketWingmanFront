@@ -225,7 +225,7 @@ const Card = () => {
               <a
                 href="https://www.tripadvisor.com/Tourism-g60763-New_York_City_New_York-Vacations.html"
                 target="_blank"
-                className="btn btn-primary mt-auto"
+                className ="btn btn-primary mt-auto"
               >
                 Learn more
               </a>

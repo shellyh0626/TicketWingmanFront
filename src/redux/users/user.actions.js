@@ -26,7 +26,6 @@ export const me = (email) => async (dispatch) => {
       "https://ticket-wing-man-backend.vercel.app/auth/me",
       {
         email,
-        withCredentials: true,
       }
     );
     console.log("ME RESPONSE", res.data);
