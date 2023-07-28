@@ -19,7 +19,8 @@ export const updateSearchData = (
 });
 
 export const searchFlights = (requestData) => async (dispatch) => {
-  const apiUrl = "http://localhost:8080/api/flights/search";
+  const apiUrl =
+    "https://ticket-wing-man-backend.vercel.app/api/flights/search";
   const searchParams = new URLSearchParams(requestData);
   const urlWithParams = `${apiUrl}?${searchParams}`;
 
@@ -67,36 +68,55 @@ export const searchFlights = (requestData) => async (dispatch) => {
   }
 };
 
-export const displayUserFlight = (userID) =>{
-  return async(dispatch)=>{
-    try{
-      const result = await axios.get(`http://localhost:8080/api/flights?id=${userID}`);
-      dispatch({type:DISPLAY_USER_FLIGHTS, payload:result.data});
-    }
-    catch(err){
+export const displayUserFlight = (userID) => {
+  return async (dispatch) => {
+    try {
+      const result =
+        await axios.get(`https://ticket-wing-man-backend.vercel.app/
+api/flights?id=${userID}`);
+      dispatch({ type: DISPLAY_USER_FLIGHTS, payload: result.data });
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};
 
-export const insertUserFlight = (userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class) => {
-  return async(dispatch) => {
-    try{
-      const result = await axios.post("http://localhost:8080/api/flights/newflight",{userEmail,carrierCode,flightNumber,scheduledDepartureDate, cabin_class});
-      dispatch({type:INSERT_USER_FLIGHTS, payload:result});
-    }catch(err){
+export const insertUserFlight = (
+  userEmail,
+  carrierCode,
+  flightNumber,
+  scheduledDepartureDate,
+  cabin_class
+) => {
+  return async (dispatch) => {
+    try {
+      const result = await axios.post(
+        "https://ticket-wing-man-backend.vercel.app/api/flights/newflight",
+        {
+          userEmail,
+          carrierCode,
+          flightNumber,
+          scheduledDepartureDate,
+          cabin_class,
+        }
+      );
+      dispatch({ type: INSERT_USER_FLIGHTS, payload: result });
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};
 
 export const deleteUserFlight = (flightID, userID) => {
-  return async(dispatch) => {
-    try{
-      const result = await axios.post("http://localhost:8080/api/flights/delete",{flightID, userID});
-      dispatch({type:DELETE_USER_FLIGHTS, payload:result.data});
-    }catch(err){
+  return async (dispatch) => {
+    try {
+      const result = await axios.post(
+        "https://ticket-wing-man-backend.vercel.app/api/flights/delete",
+        { flightID, userID }
+      );
+      dispatch({ type: DELETE_USER_FLIGHTS, payload: result.data });
+    } catch (err) {
       console.log(err);
     }
-  }
-}
+  };
+};
