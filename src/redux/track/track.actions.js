@@ -11,9 +11,12 @@ export const FETCH_FLIGHT = (payload) => {
 export const FETCH_FLIGHT_THUNK = (flightObject) => {
   return async (dispatch) => {
     try {
-      const result = await axios.get("http://localhost:8080/api/track/", {
-        params: flightObject,
-      });
+      const result = await axios.get(
+        "https://ticket-wing-man-backend.vercel.app/api/track/",
+        {
+          params: flightObject,
+        }
+      );
       dispatch(FETCH_FLIGHT(result.data));
     } catch (err) {
       console.error(err);
