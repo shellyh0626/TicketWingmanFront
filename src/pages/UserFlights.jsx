@@ -5,12 +5,17 @@ import { Link } from "react-router-dom";
 function UserFlights() {
   return (
     <div>
-      <Button>
-        <Link to="/newFlights" style={{'color' : 'white', 'text-decoration' : 'none'}}> 
-          Add new flight
-        </Link>
-      </Button>
-      <DisplayFlights/>
+      <div style={{ display: "flex", justifyContent: "center", margin: 20 }}>
+        <Button className="btn btn-primary btn-lg">
+          <Link
+            to="/newFlights"
+            style={{ color: "white", textDecoration: "none" }}
+          >
+            Add new flight
+          </Link>
+        </Button>
+      </div>
+      <DisplayFlights />
     </div>
   );
 }
