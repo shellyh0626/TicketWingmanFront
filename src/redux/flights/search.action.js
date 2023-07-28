@@ -94,7 +94,7 @@ export const deleteUserFlight = (flightID, userID) => {
   return async(dispatch) => {
     try{
       const result = await axios.post("http://localhost:8080/api/flights/delete",{flightID, userID});
-      dispatch({type:DELETE_USER_FLIGHTS, payload:result});
+      dispatch({type:DELETE_USER_FLIGHTS, payload:result.data});
     }catch(err){
       console.log(err);
     }
