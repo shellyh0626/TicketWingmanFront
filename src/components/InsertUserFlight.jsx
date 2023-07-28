@@ -37,7 +37,7 @@ function InsertUserFlight() {
               class="inputcontents"
               id="carrierCode"
               type="text"
-              placeholder="Carrier Code of the flight"
+              placeholder="Carrier Code of the flight (ex:  CX)"
               required
             />
           </InputGroup>
@@ -47,7 +47,7 @@ function InsertUserFlight() {
               class="inputcontents"
               id="flightNumber"
               type="text"
-              placeholder="Flight Number of the flight"
+              placeholder="Flight Number of the flight (ex:  840)"
               required
             />
           </InputGroup>
@@ -57,7 +57,7 @@ function InsertUserFlight() {
               class="inputcontents"
               id="departureDate"
               type="text"
-              placeholder="Departure Date of the flight"
+              placeholder="Departure Date of the flight (ex: YYYY-DD-MM) "
               required
             />
           </InputGroup>
