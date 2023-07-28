@@ -51,6 +51,7 @@ const SearchResults = () => {
       setTempF(true);
     }
   };
+
   // Check if data exists and if it is an array
   if (!data || !Array.isArray(data)) {
     return <p>No data</p>;
@@ -66,6 +67,7 @@ const SearchResults = () => {
     ) {
       return false;
     }
+
     // Filter based on price
     if (selectedPrice) {
       const price = parseFloat(flight.total_price.total);
@@ -141,7 +143,7 @@ const SearchResults = () => {
   });
 
   // Create a separate state for each flight ticket to see whether it is expanded or not.
-  // The state is an array of booleans. 
+  // The state is an array of booleans.
   const toggleFlightInfo = (index) => {
     setExpandedFlightIndices((prevIndices) => {
       const updatedIndices = [...prevIndices];
@@ -210,6 +212,7 @@ const SearchResults = () => {
   return (
     <div>
       <div className="dropdown-menu-container">
+        {/* This div contains all the droppdown menu, group them together, and align them in the center */}
         <div className="select-container">
           <select
             id="cabinSelect"
@@ -278,6 +281,7 @@ const SearchResults = () => {
           </select>
         </div>
 
+        {/* This div contains travel advisory info from travel advisory api */}
         <div>
           <div className="advisory-container">
             <h3>
@@ -316,6 +320,7 @@ const SearchResults = () => {
           </div>
         </div>
 
+        {/* This div is for temperature chartJs diagram */}
         <div>
           <div className="temperature-display-container">
             <div className="temperature-inner-container">
@@ -420,7 +425,7 @@ const SearchResults = () => {
                 ))}
 
                 {/* Add divider: Display return ticket info */}
-                {expandedFlightIndex === index &&
+                {expandedFlightIndices[index] &&
                   flight.tickets.return_ticket &&
                   flight.tickets.return_ticket.length > 0 && (
                     <div className="return-ticket-divider">
@@ -460,9 +465,9 @@ const SearchResults = () => {
                     </div>
                   )}
 
-                {expandedFlightIndex === index && flight.total_price && (
+                {expandedFlightIndices[index] && flight.total_price && (
                   <p>
-                    Price:{flight.total_price.total}{" "}
+                    Price: {flight.total_price.total}{" "}
                     {flight.total_price.currency}
                   </p>
                 )}
