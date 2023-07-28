@@ -90,6 +90,13 @@ function App() {
           )}
           {isLoggedIn && (
             <li className="nav-item">
+              <Link to="/track" className="nav-link mx-2">
+                Track
+              </Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className="nav-item">
               <Link className="nav-link mx-2" onClick={handleLogOut}>
                 Logout
               </Link>
