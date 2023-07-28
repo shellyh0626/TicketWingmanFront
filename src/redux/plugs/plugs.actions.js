@@ -8,10 +8,11 @@ export const FETCH_PLUGS_TYPE = (payload) => {
     }
 }
 
-export const FETCH_PLUGS_TYPE_THUNK = async (countryCode) => {
+//takes in alpha2 country code as parameter to fetch the plugs info from database
+export const FETCH_PLUGS_TYPE_THUNK = (countryCode) => {
     return async(dispatch) => {
         try{
-            const result = await axios.get(`http://localhost:8080/api/plugs/?counterCode=${countryCode}`);
+            const result = await axios.get(`http://localhost:8080/api/plugs/?counterCode=${countryCode.toUpperCase()}`);
             dispatch(FETCH_PLUGS_TYPE(result.data));
         }catch(err){
             console.log(err);
