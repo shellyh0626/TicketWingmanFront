@@ -8,6 +8,7 @@ import {
 import "../css/SearchBarCSS.css";
 import Search from "../assets/search.png";
 import { addDays, format } from "date-fns"; // Use npm install date-fns to import this package from npm
+import LoadingPage from "../components/LoadingPage";
 
 const SearchBar = (props) => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ const SearchBar = (props) => {
   );
   const [returnValue, setReturnValue] = useState("");
   const [type, setType] = useState("One-way"); // Add the state of type. The default will be one-way
-
+  const [loading, setLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false); // A hook that tracks if the user searched their input
 
   const handleChangeFrom = (e) => {
@@ -33,7 +34,7 @@ const SearchBar = (props) => {
     setToValue(inputValue);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (fromValue === "") {
       alert("Please fill in the departure airport.");
       return;
@@ -46,6 +47,8 @@ const SearchBar = (props) => {
       alert("Please select the return date for Roundtrip.");
       return;
     }
+    setHasSearched(true);
+    setLoading(true);
 
     const requestData = {
       originLocationCode: fromValue,
@@ -56,8 +59,14 @@ const SearchBar = (props) => {
     if (returnValue && type === "Roundtrip") {
       requestData.returnDate = returnValue;
     }
-    props.searchFlights(requestData);
-    setHasSearched(true); // Already searched
+
+    try {
+      await props.searchFlights(requestData);
+      setLoading(false); // Hide the loading page after the API call is completed
+    } catch (error) {
+      console.log("Error fetching data:", error);
+      setLoading(false); // Hide the loading page if there's an error
+    }
   };
 
   useEffect(() => {
@@ -145,6 +154,7 @@ const SearchBar = (props) => {
       <button type="submit" onClick={handleSubmit}>
         <img src={Search} alt="" />
       </button>
+      {loading && <LoadingPage />}
     </div>
   );
 };
