@@ -28,11 +28,19 @@ const SearchResults = () => {
   const [selectedEmissions, setSelectedEmissions] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
   const [tempF, setTempF] = useState(true);
+  const [expandedFlightIndices, setExpandedFlightIndices] = useState([]);
 
   useEffect(() => {
     console.log(tempF);
     dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
   }, [dispatch]);
+
+  useEffect(() => {
+    // Initialize the expandedFlightIndices array with false for each flight
+    if (data && Array.isArray(data)) {
+      setExpandedFlightIndices(new Array(data.length).fill(false));
+    }
+  }, [data]);
 
   const changeScale = () => {
     if (tempF) {
@@ -132,8 +140,14 @@ const SearchResults = () => {
     return true;
   });
 
+  // Create a separate state for each flight ticket to see whether it is expanded or not.
+  // The state is an array of booleans. 
   const toggleFlightInfo = (index) => {
-    setExpandedFlightIndex((prevIndex) => (prevIndex === index ? -1 : index));
+    setExpandedFlightIndices((prevIndices) => {
+      const updatedIndices = [...prevIndices];
+      updatedIndices[index] = !updatedIndices[index];
+      return updatedIndices;
+    });
   };
 
   const extractDateTime = (dateTime) => {
@@ -366,7 +380,7 @@ const SearchResults = () => {
                     {flight.total_price.currency}
                   </span>
                   <button className="flight-ticket-button">
-                    {expandedFlightIndex === index ? "▲" : "▼"}
+                    {expandedFlightIndices[index] ? "▲" : "▼"}
                   </button>
                 </div>
 
@@ -375,7 +389,7 @@ const SearchResults = () => {
                   <div
                     key={i}
                     className={`departure-ticket-container ${
-                      expandedFlightIndex === index ? "show" : ""
+                      expandedFlightIndices[index] ? "show" : ""
                     }`}
                   >
                     <h3>Flight {i + 1}</h3>
