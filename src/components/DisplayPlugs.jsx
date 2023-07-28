@@ -2,7 +2,7 @@ import react, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../css/flightsCard.css"
 
-function DisplayPlugs() {
+function DisplayPlugs(props) {
     const foundPlugs = useSelector((state) => state.plugs.plugsType);
 
     return (
@@ -10,6 +10,7 @@ function DisplayPlugs() {
             {/* if foundPlugs is empty then display Loading......, if not empty then display the plugs info of given country */}
             {foundPlugs.length !== 0 ? (
                 <div>
+                    <h4>{props.countryName} uses these plug(s), so make sure to bring them with you when traveling!</h4>
                     {/* shows the types of plugs/socket*/}
                     <div className="flight-container">
                         <div>

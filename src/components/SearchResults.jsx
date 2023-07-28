@@ -323,6 +323,11 @@ const SearchResults = () => {
           </div>
         </div>
 
+        <div>
+          {/* This component will display the plugs types based on the country of current search result */}
+          <DisplayPlugs countryName={dataMart && countryData.data[countryCode].name}/>
+        </div>
+
         {/* This div is for temperature chartJs diagram */}
         <div>
           <div className="temperature-display-container">
@@ -336,12 +341,6 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
-        
-        <div>
-          {/* This component will display the plugs types based on the country of current search result */}
-          <DisplayPlugs/>
-        </div>
-
         <br />
 
         {/* This div group emission calculator and all the flight tickets together */}
