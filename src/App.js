@@ -20,6 +20,7 @@ import Track from "./pages/Track";
 import UserFlights from "./pages/UserFlights";
 import InsertFlight from "./pages/InsertFlight";
 import "./css/Navbar.css";
+import logo from "./assets/ticketwingman_colornav.png";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ function App() {
     <div className="App">
       {/* Navigation */}
       <nav className="navbar navbar-expand-lg navbar-dark p-3">
+        <img src={logo} className="logoNav" />
         <ul className="navbar-nav mx-auto">
           {isLoggedIn ? (
             <li className="nav-item">

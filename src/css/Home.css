@@ -4,13 +4,8 @@
   height: 100%;
 }
 
-.home video {
-  width: 100%;
-  height: 60%;
-  object-fit: cover;
-}
-
-.text h2 {
+.logo {
+  width: 250px;
   position: absolute;
   display: inline;
   left: 50%;
@@ -22,10 +17,28 @@
   text-shadow: rgb(70, 71, 90) -1px 0 5px;
 }
 
+.home video {
+  width: 100%;
+  height: 60%;
+  object-fit: cover;
+}
+
+.text h2 {
+  position: absolute;
+  display: inline;
+  left: 50%;
+  top: 30%;
+  transform: translate(-50%, -50%);
+  font-size: 30px;
+  color: white;
+  font-weight: 800;
+  text-shadow: rgb(70, 71, 90) -1px 0 5px;
+}
+
 .searchBar {
   width: 100%;
   position: absolute;
-  top: 18%;
+  top: 30%;
   opacity: 0.9;
 }
 
