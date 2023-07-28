@@ -15,8 +15,14 @@ function DisplayPlugs(props) {
                     <div className="flight-container">
                         <div>
                             {/* shows the frequency of plugs/socket*/}
-                            <p>Frequency: {foundPlugs[0].frequency.hertz}{foundPlugs[0].frequency.unit}</p>
                             {/* shows the voltage of plugs/socket*/}
+                            {foundPlugs[0].frequency.hertz.map((data, i) => {
+                                return (
+                                    <div key={i}>
+                                        <p>Frequency: {data}{foundPlugs[0].frequency.unit}</p>
+                                    </div>
+                                );
+                            })}
                             {foundPlugs[0].voltage.volt.map((data, i) => {
                                 return (
                                     <div key={i}>
