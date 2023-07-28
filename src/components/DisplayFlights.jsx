@@ -26,7 +26,7 @@ const DisplayFlights = () => {
                         <p>Departure Date: {convertTime(data.departure_date)}</p>
                         <p>To: {data.arrival_location}</p>
                         <p>Arrival Date: {convertTime(data.arrival_date)}</p>
-                        <p>Emissions: {data.emissions}</p>
+                        <p>{data.id}</p>
                         {/* <Weather destination= {data.arrival_location}/> */}
                         {/* <Link to = "/weather" state={{destination:data.arrival_location}}>show weather</Link> */}
                     </div>
