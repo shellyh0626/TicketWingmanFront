@@ -19,6 +19,7 @@ import Weather from "./pages/Weather";
 import Track from "./pages/Track";
 import UserFlights from "./pages/UserFlights";
 import InsertFlight from "./pages/InsertFlight";
+import LoadingPage from "./components/LoadingPage";
 import "./css/Navbar.css";
 
 function App() {
@@ -90,6 +91,13 @@ function App() {
           )}
           {isLoggedIn && (
             <li className="nav-item">
+              <Link to="/track" className="nav-link mx-2">
+                Track
+              </Link>
+            </li>
+          )}
+          {isLoggedIn && (
+            <li className="nav-item">
               <Link className="nav-link mx-2" onClick={handleLogOut}>
                 Logout
               </Link>
@@ -115,6 +123,7 @@ function App() {
         <Route path="/emission" element={<Emission />} />
         <Route path="/track" element={<Track />} />
         <Route path="/newFlights" element={<InsertFlight />} />
+        <Route path="/LoadingPage" element={<LoadingPage />} />
       </Routes>
     </div>
   );
