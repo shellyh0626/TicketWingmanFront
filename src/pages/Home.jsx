@@ -8,7 +8,6 @@ import "../css/Home.css";
 function Home() {
   return (
     <div className="home">
-      {/* <Card /> */}
       <video muted loop autoPlay>
         <source src={video} type="video/mp4" />
         Your browser does not support the video tag. I suggest you upgrade your
@@ -25,8 +24,7 @@ function Home() {
         <SearchBar />
       </div>
       <div className="card-grid-heading">
-        <h2>Popular Destinations</h2>
-        <h4>Based on your location</h4>
+        <h3>Popular Destinations</h3>
       </div>
       <Card />
     </div>
