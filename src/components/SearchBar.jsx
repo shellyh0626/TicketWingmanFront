@@ -42,6 +42,11 @@ const SearchBar = (props) => {
       alert("Please fill in the arrival airport.");
       return;
     }
+    if (type === "Roundtrip" && returnValue === "") {
+      alert("Please select the return date for Roundtrip.");
+      return;
+    }
+
     const requestData = {
       originLocationCode: fromValue,
       destinationLocationCode: toValue,
@@ -80,8 +85,6 @@ const SearchBar = (props) => {
     // When flight type or trip type changes, return date value changes
     if (type === "One-way") {
       setReturnValue(""); // Clear return date value
-    } else if (type === "Roundtrip") {
-      setReturnValue(format(addDays(new Date(), 4), "yyyy-MM-dd")); // Set the return date to three days after departure date
     }
   }, [type]);
 
