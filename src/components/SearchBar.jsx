@@ -16,7 +16,7 @@ const SearchBar = (props) => {
   const [fromValue, setFromValue] = useState("");
   const [toValue, setToValue] = useState("");
   const [departValue, setDepartValue] = useState(
-    format(new Date(), "yyyy-MM-dd")
+    format(addDays(new Date(), 1), "yyyy-MM-dd")
   );
   const [returnValue, setReturnValue] = useState("");
   const [type, setType] = useState("One-way"); // Add the state of type. The default will be one-way
@@ -35,11 +35,11 @@ const SearchBar = (props) => {
 
   const handleSubmit = () => {
     if (fromValue === "") {
-      alert("Please fill in the departure airport or city.");
+      alert("Please fill in the departure airport.");
       return;
     }
     if (toValue === "") {
-      alert("Please fill in the arrival airport or city.");
+      alert("Please fill in the arrival airport.");
       return;
     }
     const requestData = {
@@ -68,7 +68,9 @@ const SearchBar = (props) => {
       props.flights.travelAdvisoryData
     ) {
       console.log("Directed successfully to search result page");
-      navigate("/SearchResults", { state: { data: props.flights, targetLocation: toValue} });
+      navigate("/SearchResults", {
+        state: { data: props.flights, targetLocation: toValue },
+      });
     } else {
       console.log("Directed unsuccessfully");
     }
@@ -79,7 +81,7 @@ const SearchBar = (props) => {
     if (type === "One-way") {
       setReturnValue(""); // Clear return date value
     } else if (type === "Roundtrip") {
-      setReturnValue(format(addDays(new Date(), 3), "yyyy-MM-dd")); // Set the return date to three days after departure date
+      setReturnValue(format(addDays(new Date(), 4), "yyyy-MM-dd")); // Set the return date to three days after departure date
     }
   }, [type]);
 
@@ -89,7 +91,7 @@ const SearchBar = (props) => {
         <label>From</label>
         <input
           type="text"
-          placeholder="Airport or City"
+          placeholder="Airport"
           className="inputField"
           value={fromValue}
           onChange={handleChangeFrom} // Update fromValue
@@ -100,7 +102,7 @@ const SearchBar = (props) => {
         <label>To</label>
         <input
           type="text"
-          placeholder="Airport or City"
+          placeholder="Airport"
           className="inputField"
           value={toValue}
           onChange={handleChangeTo} // Update toValue
