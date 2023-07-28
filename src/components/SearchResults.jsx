@@ -9,6 +9,8 @@ import DisplayTemp from "./DisplayTemp";
 import DisplayWeather from "./DisplayWeather";
 import EmissionCalculator from "./EmissionCalculator";
 import "../css/SearchResults.css";
+import { FETCH_PLUGS_TYPE_THUNK } from "../redux/plugs/plugs.actions";
+import DisplayPlugs from "./DisplayPlugs";
 
 const SearchResults = () => {
   // console.log("Render Search Results page");
@@ -33,6 +35,7 @@ const SearchResults = () => {
   useEffect(() => {
     console.log(tempF);
     dispatch(FETCH_WEATHER_F_THUNK(location.state.targetLocation));
+    dispatch(FETCH_PLUGS_TYPE_THUNK(countryCode));
   }, [dispatch]);
 
   useEffect(() => {
@@ -333,6 +336,12 @@ const SearchResults = () => {
             </div>
           </div>
         </div>
+        
+        <div>
+          {/* This component will display the plugs types based on the country of current search result */}
+          <DisplayPlugs/>
+        </div>
+
         <br />
 
         {/* This div group emission calculator and all the flight tickets together */}
