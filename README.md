@@ -30,7 +30,7 @@
     <img src="src/assets/ticketwingman_color.png" alt="Logo" width="90" height="90">
   </a>
 
-<h3 align="center">Ticket Wingman</h3>
+<h2 align="center">Ticket Wingman</h2>
 
   <p align="center">
     project_description
