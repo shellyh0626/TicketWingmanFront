@@ -33,16 +33,10 @@
 <h3 align="center">Ticket Wingman</h3>
 
   <p align="center">
-    project_description
+    A flight search app that aims to simplify the process of booking flights and planning trips.
     <br />
-    <!-- <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a> -->
-    <!-- <br /> -->
-    <!-- <br /> -->
     <a href="https://github.com/github_username/repo_name">View Demo</a>
-    <!-- ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a> -->
+
   </p>
 </div>
 
@@ -51,7 +45,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-project">About Ticket Wingman</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -74,11 +68,9 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## About Ticket Wingman
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+Ticket Wingman is a web application that allows users to look up flight details, carbon dioxide emissions, destination travel awareness, past-year weather and rainfall records, supported plug types at the destination, and real-time flight status tracking. It provides an easy-to-use interface, and is built using modern web technologies and APIs to ensure a smooth and efficient user experience.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
