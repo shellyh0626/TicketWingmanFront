@@ -19,7 +19,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
+[![Contributors][contributors-shield]][contributors-url][contributors-url2]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -205,6 +205,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 
 [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/shellyh0626
+[contributors-url2]: https://github.com/kai2233
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 [forks-url]: https://github.com/github_username/repo_name/network/members
 [stars-shield]: https://img.shields.io/github/stars/github_username/repo_name.svg?style=for-the-badge
