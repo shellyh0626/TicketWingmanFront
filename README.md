@@ -27,7 +27,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/github_username/repo_name">
-    <img src="src/assets/ticketwingman_color.png" alt="Logo" width="100" height="100">
+    <img src="src/assets/ticketwingman_color.png" alt="Logo" width="90" height="90">
   </a>
 
 <h3 align="center">Ticket Wingman</h3>
