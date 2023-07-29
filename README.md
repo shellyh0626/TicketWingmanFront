@@ -76,14 +76,16 @@ Ticket Wingman is a web application that allows users to look up flight details,
 
 ### Built With
 
-- [![Next][Next.js]][Next-url]
 - [![React][React.js]][React-url]
+- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
+
 - [![Vue][Vue.js]][Vue-url]
 - [![Angular][Angular.io]][Angular-url]
 - [![Svelte][Svelte.dev]][Svelte-url]
 - [![Laravel][Laravel.com]][Laravel-url]
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 - [![JQuery][JQuery.com]][JQuery-url]
+- [![Redux][Redux.js]][Redux-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -201,8 +203,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [license-shield]: https://img.shields.io/github/license/github_username/repo_name.svg?style=for-the-badge
 [license-url]: https://github.com/github_username/repo_name/blob/master/LICENSE.txt
 [product-screenshot]: images/screenshot.png
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
+[Redux.js]: https://img.shields.io/badge/redux.js-000000?style=for-the-badge&logo=redux&logoColor=%2300a7e5&color=%23ffffff
+[Redux-url]: https://redux.js.org/
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
