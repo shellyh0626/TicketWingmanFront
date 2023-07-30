@@ -100,11 +100,11 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-Make sure you install node and npm with this:
+Install Node.js and npm: Ensure you have Node.js installed on your system. Node.js comes with npm (Node Package Manager), so you don't need to install npm separately.
 
-- npm
+- Node.js and npm
   ```sh
-  npm install npm@latest -g
+  npm install -g npm
   ```
 
 ### Installation
