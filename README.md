@@ -83,6 +83,8 @@ Ticket Wingman is a web application that allows users to look up flight details,
 
 ### API Documentations
 
+- https://www.travel-advisory.info/data-api
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
