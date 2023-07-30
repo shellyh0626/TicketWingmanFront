@@ -49,6 +49,7 @@
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#api-documentations">Api Documentations</a></li>
+        <li><a href="#features">Features</a></li>
       </ul>
     </li>
     <li>
@@ -59,7 +60,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#features">Features</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -88,6 +89,17 @@ Ticket Wingman is a web application that allows users to look up flight details,
 - https://open-meteo.com
 - https://aviationstack.com/documentation
 - https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator
+
+### Features
+
+- [ ] Daily updated country advisories for searched destination
+- [ ] Historical weather and rainfall chart for searched destination
+- [ ] Types of available plugs in the searched destination
+- [ ] Carbon dioxide emission for a specific flight
+- [ ] Real-time tracked information of your flight
+- [ ] Save a specific flight on Ticket Wingman account
+- [ ] Information on popular travel destinations
+- [ ] Google and GitHub OAuth
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,14 +153,16 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 <!-- ROADMAP -->
 
-## Roadmap
+## Features
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-  - [ ] Nested Feature
-
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+- [ ] Daily updated country advisories for searched destination
+- [ ] Historical weather and rainfall chart for searched destination
+- [ ] Types of available plugs in the searched destination
+- [ ] Carbon dioxide emission for a specific flight
+- [ ] Real-time tracked information of your flight
+- [ ] Save a specific flight on Ticket Wingman account
+- [ ] Information on popular travel destinations
+- [ ] Google and GitHub OAuth
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
