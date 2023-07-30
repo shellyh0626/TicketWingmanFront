@@ -95,7 +95,6 @@ Ticket Wingman is a web application that allows users to look up flight details,
 
 ## Getting Started
 
-Below is how to set up project locally.
 To get a local copy up and running follow these simple example steps:
 
 ### Prerequisites
