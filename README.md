@@ -112,13 +112,17 @@ Install Node.js and npm: Node.js comes with npm (Node Package Manager), so you d
    ```sh
    git clone https://github.com/9Mohamedismail/TicketWingman.git
    ```
-2. Install NPM packages
+2. Navigate to the Project Directory
+   ```sh
+   cd TicketWingman
+   ```
+3. Install npm packages
    ```sh
    npm install
    ```
-3. Navigate to the Project Directory
+4. Start the Application
    ```sh
-   cd TicketWingman
+   npm start
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
