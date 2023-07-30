@@ -92,12 +92,13 @@ Ticket Wingman is a web application that allows users to look up flight details,
 
 ### Features
 
+- [ ] Search for a flight and get information such as price, duration, emissions, etc
 - [ ] Daily updated country advisories for searched destination
 - [ ] Historical weather and rainfall chart for searched destination
 - [ ] Types of available plugs in the searched destination
-- [ ] Carbon dioxide emission for a specific flight
+- [ ] Visualize carbon dioxide emission with real-life examples
 - [ ] Real-time tracked information of your flight
-- [ ] Save a specific flight on Ticket Wingman account
+- [ ] Save information about a specific flight on Ticket Wingman account
 - [ ] Information on popular travel destinations
 - [ ] Google and GitHub OAuth
 
@@ -148,21 +149,6 @@ Install Node.js and npm: Node.js comes with npm (Node Package Manager), so you d
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-
-## Features
-
-- [ ] Daily updated country advisories for searched destination
-- [ ] Historical weather and rainfall chart for searched destination
-- [ ] Types of available plugs in the searched destination
-- [ ] Carbon dioxide emission for a specific flight
-- [ ] Real-time tracked information of your flight
-- [ ] Save a specific flight on Ticket Wingman account
-- [ ] Information on popular travel destinations
-- [ ] Google and GitHub OAuth
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
