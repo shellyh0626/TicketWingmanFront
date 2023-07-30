@@ -124,6 +124,8 @@ Install Node.js and npm: Node.js comes with npm (Node Package Manager), so you d
    ```sh
    npm start
    ```
+5. Access the Application:
+   Once the application has started successfully, you can access it in your web browser by visiting http://localhost:3000 (or a different port if specified in the project).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
