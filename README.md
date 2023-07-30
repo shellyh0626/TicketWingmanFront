@@ -79,7 +79,7 @@ Ticket Wingman is a web application that allows users to look up flight details,
 - [![React][React.js]][React-url]
 - [![Redux][Redux.js]][Redux-url]
 - [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-- [![Vue][Vue.js]][ChartJs-url]
+- [![Chart][Chart.js]][ChartJs-url]
 
 - [![Angular][Angular.io]][Angular-url]
 - [![Svelte][Svelte.dev]][Svelte-url]
@@ -205,7 +205,7 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [product-screenshot]: images/screenshot.png
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
-[Redux.js]: https://img.shields.io/badge/redux.js-000000?style=for-the-badge&logo=redux&logoColor=%23764ABC
+[Redux.js]: https://img.shields.io/badge/redux.js-000000?style=for-the-badge&logo=redux&logoColor=%23764ABC&color=%23eee
 [Redux-url]: https://redux.js.org/
 [Chart.js]: https://img.shields.io/badge/chart.js-000000?style=for-the-badge&logo=chartdotjs&logoColor=%23FF6384&color=%23eee
 [ChartJs-url]: https://www.chartjs.org/
