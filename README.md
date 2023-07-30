@@ -100,9 +100,7 @@ To get a local copy up and running follow these simple example steps:
 
 ### Prerequisites
 
-#### Install Node.js and npm:
-
-Node.js comes with npm (Node Package Manager), so you don't need to install npm separately.
+Install Node.js and npm: Node.js comes with npm (Node Package Manager), so you don't need to install npm separately.
 
 - Node.js and npm
   ```sh
