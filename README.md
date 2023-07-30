@@ -96,11 +96,12 @@ Ticket Wingman is a web application that allows users to look up flight details,
 ## Getting Started
 
 Below is how to set up project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these simple example steps:
 
 ### Prerequisites
 
-Install Node.js and npm: Ensure you have Node.js installed on your system. Node.js comes with npm (Node Package Manager), so you don't need to install npm separately.
+Install Node.js and npm:
+Ensure you have Node.js installed on your system. Node.js comes with npm (Node Package Manager), so you don't need to install npm separately.
 
 - Node.js and npm
   ```sh
